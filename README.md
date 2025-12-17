@@ -1,2 +1,2 @@
 # HomeStock
-Home stock controll web-application.
+Home stock control web-application written in nodeJS/MariaDB.
