@@ -1,0 +1,19 @@
+{
+  "name": "homestock",
+  "version": "1.0.0",
+  "description": "Home stock control web-application written in nodeJS/MariaDB.",
+  "main": "./public/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaioEmPessoa/HomeStock.git"
+  },
+  "author": "CaioEmPessoa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CaioEmPessoa/HomeStock/issues"
+  },
+  "homepage": "https://github.com/CaioEmPessoa/HomeStock#readme"
+}
