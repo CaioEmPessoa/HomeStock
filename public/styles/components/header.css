@@ -1,0 +1,64 @@
+
+/* HEADER */
+.header {
+    display: flex;
+    width: 100%;
+    padding: 7px 15px;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+
+/* HEADER REDIRECTS */
+.header-redirects {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+}
+
+.header-redirects hr {
+    height: 50%;
+}
+
+.header-redirects button {
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.header-redirects button:hover {
+    background-color: #afafaf;
+    transition: 0.3s;
+}
+
+.header-redirects img {
+    max-width: 45px;
+}
+
+.header-title {
+    width: 100%;
+    text-align: center;
+}
+
+/* HEADER PROFILE */
+.header-profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 35px;
+    width: 100%;
+}
+
+.header-profile .profile-username {
+    font-size: larger;
+}
+
+.header-profile .profile-pic {
+    border-radius: 200px;
+    max-width: 80px;
+}
+
+.header-profile .profile-pic img {
+    border-radius: 100%;
+}
+
+/* ------- END HEADER ------- */

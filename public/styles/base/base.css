@@ -35,3 +35,19 @@ textarea,
 select {
   font: inherit;
 }
+
+button {
+  color: none;
+  background-color: none;
+  background: none;
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.container {
+  max-width: 100%;
+  margin: 15px;
+}

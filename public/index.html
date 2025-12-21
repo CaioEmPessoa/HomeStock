@@ -7,68 +7,92 @@
     <title>Home Stock!</title>
 </head>
 <body>
-    <header class="header">
-        <div class="header-redirects">
-            <div class="redirects-house">^</div>
-            <div class="redirects-complex">o</div>
-            <div class="redirects-minimal">~</div>
-            <div class="redirects-text">-</div>
-        </div>
-        <div class="header-profile">
-            <div class="profile-username">Username</div>
-            <div class="profile-pic">
-                <!-- Go to configs. -->
-                 <a href="#">
-                    <img src="https://placehold.co/25x25" alt="#">
-                 </a>
-            </div>
-        </div>
-    </header>
-
-    <div class="content">
-        <div class="products-list">
-            <h1>Produtos</h1>
-
-            <!-- FILTROS DE PRODUTOS -->
-            <div class="products-filters">
-                <div class="products-filters-left">
-                    <div class="new-produtct">
-                        <button class="new-product-button">+ Novo Produto</button>
-                    </div>
-                    <div class="reload-products-list">
-                        <a href="#">
-                            <img src="https://placehold.co/15x15" alt="#">
-                        </a>
-                    </div>
+    <div class="container">
+        <header class="header">
+            <div class="header-redirects">
+                <div class="redirects-house">
+                    <button>
+                        <img src="/public/src/imgs/home-icon.png" alt="">
+                    </button>
                 </div>
-                <div class="products-filters-right">
-                    <div class="compact-list-view">
-                        <button class="compact-list-view-button">𝄘</button>
-                    </div>
-                    <div class="card-list-view">
-                        <button class="card-list-view-button">⛶</button>
-                    </div>
+                <hr>
+                <div class="redirects-complex">
+                    <button>
+                        <img src="/public/src/imgs/spiral-icon.png" alt="">
+                    </button>
+                </div>
+                <hr>
+                <div class="redirects-minimal">
+                    <button>
+                        <img src="/public/src/imgs/tilde-icon.png" alt="">
+                    </button>
+                </div>
+                <hr>
+                <div class="redirects-text">
+                    <button>
+                        <img src="/public/src/imgs/dash-icon.png" alt="">
+                    </button>
                 </div>
             </div>
+            <div class="header-title">
+                <h1>Casa dos Polonio!</h1>
+            </div>
+            <div class="header-profile">
+                <div class="profile-username"><p>Username</p></div>
+                <div class="profile-pic">
+                    <!-- Go to configs. -->
+                    <a href="#">
+                        <img src="https://placehold.co/125x125" alt="#">
+                    </a>
+                </div>
+            </div>
+        </header>
 
-            <div class="products-compact-list">
-                <div class="product-compact-list-item">
+        <div class="content">
+            <div class="products-list">
+                <h1>Produtos</h1>
 
-                    <!-- INFO DO PRODUTO ( [] ~~~ ) -->
-                    <div class="compact-item-info">
-                        <img class="compact-item-icon" src="https://placehold.co/15x15" alt="#">
-                        <p class="compact-item-name">Nome do Produto</p>
+                <!-- FILTROS DE PRODUTOS -->
+                <div class="products-filters">
+                    <div class="products-filters-left">
+                        <div class="new-produtct">
+                            <button class="new-product-button">+ Novo Produto</button>
+                        </div>
+                        <div class="reload-products-list">
+                            <a href="#">
+                                <img src="https://placehold.co/15x15" alt="#">
+                            </a>
+                        </div>
                     </div>
-
-                    <!-- CONTROLE DE ESTOQUE ( - [ ] + ) -->
-                    <div class="compact-item-stock">
-                        <button class="compact-item-stock-remove">-</button>
-                        <input class="compact-item-stock-edit"></input>
-                        <button class="compact-item-stock-increase">+</button>
+                    <div class="products-filters-right">
+                        <div class="compact-list-view">
+                            <button class="compact-list-view-button">𝄘</button>
+                        </div>
+                        <div class="card-list-view">
+                            <button class="card-list-view-button">⛶</button>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="compact-item-actions">
-                        <button class="compact-item-actions-more">...</button>
+                <div class="products-compact-list">
+                    <div class="product-compact-list-item">
+
+                        <!-- INFO DO PRODUTO ( [] ~~~ ) -->
+                        <div class="compact-item-info">
+                            <img class="compact-item-icon" src="https://placehold.co/15x15" alt="#">
+                            <p class="compact-item-name">Nome do Produto</p>
+                        </div>
+
+                        <!-- CONTROLE DE ESTOQUE ( - [ ] + ) -->
+                        <div class="compact-item-stock">
+                            <button class="compact-item-stock-remove">-</button>
+                            <input class="compact-item-stock-edit"></input>
+                            <button class="compact-item-stock-increase">+</button>
+                        </div>
+
+                        <div class="compact-item-actions">
+                            <button class="compact-item-actions-more">...</button>
+                        </div>
                     </div>
                 </div>
             </div>
