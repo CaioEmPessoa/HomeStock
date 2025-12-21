@@ -62,3 +62,21 @@
 }
 
 /* ------- END HEADER ------- */
+
+/* PRODUCTS FILTERS */
+
+.products-filters {
+    margin-top: 25px;
+    padding: 30px 20px;
+    border-top: 1px solid black;
+    display: flex;
+}
+
+.new-produtct .new-product-button {
+    padding: 5px;
+    color: limegreen;
+    font-weight: 900;
+    border: 3px solid lime;
+    border-radius: 5px;
+    /* background-color: rgba(96, 255, 96, 0.5); */
+}
