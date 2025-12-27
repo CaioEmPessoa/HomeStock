@@ -1,5 +1,7 @@
 
-const debug = (msg) => {
+// msg = message to be logged in
+// raw = is message printed formatted or raw. Defaults to False
+const debug = (msg, raw) => {
     const now = new Date();
     const hour = now.toLocaleTimeString('pt-BR', {
         hour: '2-digit', 
@@ -8,7 +10,9 @@ const debug = (msg) => {
         hour12: false
     });
 
-    console.log(`LOG ${hour} - ${msg}`);
+    raw = raw ? true : false; // Valor padrão para raws
+
+    console.log( raw ? msg : `LOG ${hour} - ${msg}`);
 }
 
 module.exports = {
