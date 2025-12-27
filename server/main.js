@@ -1,11 +1,17 @@
 const express = require('express');
 const path = require('path')
 
+const { debug } = require('./logs')
+
 const PORT = 2469;
 const ROOT = path.join(__dirname, "..");
 
+debug("ROOT PATH : " + ROOT);
+
 const app = express();
 app.listen(PORT);
+
+debug(`RUNNING AT: http://localhost:${PORT}`)
 
 app.get('/', (req, res) => {
   res.sendFile('/public/index.html', { root: ROOT });
