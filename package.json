@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/CaioEmPessoa/HomeStock/issues"
   },
-  "homepage": "https://github.com/CaioEmPessoa/HomeStock#readme"
+  "homepage": "https://github.com/CaioEmPessoa/HomeStock#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
