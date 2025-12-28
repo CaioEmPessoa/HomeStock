@@ -1,0 +1,186 @@
+
+/* PRODUCTS SECTION */
+.products-list {
+    margin: 35px 5% 0px 5%;
+    padding: 25px 25px;
+    border-radius: 10px;
+    background-color: var(--primary-bg);
+}
+
+/* PRODUCTS FILTERS */
+
+.products-filters {
+    margin-top: 7px;
+    display: flex;
+}
+
+.products-filters-left {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+}
+
+/* SEARCH BAR */
+.fx {
+  display: flex;
+}
+
+.fx-gap {
+  gap: 18px;
+}
+
+.search-bar-input,
+.search-bar-button {
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.search-bar {
+  background-color: var(--secondary);
+  border-radius: 20px;
+  box-shadow: 0 2px 7px #ff7c7c, 0 0 0 2px #ffffffeb;
+  height: 30px;
+  padding: 7px 15px 7px 10px;
+  transition: 0.3s;
+}
+
+.search-bar:focus-within
+{
+  box-shadow: 0 2px 10px #ffffffeb, 0 0 0 2px #ff7c7c;
+  transition: 0.3s;
+  animation-fill-mode: forwards
+}
+
+.search-bar-input[type="text"] {
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.search-bar-input[type="text"]::placeholder {
+  color: #e16868;
+}
+
+.search-bar-button {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* ----- END SERACH BAR ----- */
+
+
+.new-produtct .new-product-button { 
+    padding: 8px 17px;
+    color: white;
+    font-weight: 700;
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+.reload-products-list img {
+    max-width: 40px;
+}
+
+.products-filters-right {
+    display: flex;
+    gap: 15px;
+}
+
+.products-filters-right img {
+    max-width: 50px;
+}
+
+/* LISTAGEM DOS PRODUTOS */
+
+.product-compact-list-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.compact-item-info {
+    display: flex;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+}
+
+.compact-item-info .compact-item-icon {
+    border: solid 1px black;
+    border-radius: 5px;
+    max-width: 50px;
+}
+
+.compact-item-info .compact-item-name {
+    font-size: larger;
+}
+
+.compact-item-stock {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.compact-item-stock .compact-item-stock-remove, .compact-item-stock .compact-item-stock-increase {
+    font-size: 50px;
+}
+
+.compact-item-stock .compact-item-stock-remove {
+    color: red;
+}
+
+.compact-item-stock .compact-item-stock-increase {
+    color: limegreen;
+}
+
+.compact-item-stock .compact-item-stock-edit {
+    font-size: 25px;
+    max-width: 50px;
+    padding: 5px;
+}
+
+.compact-item-actions .compact-item-actions-more {
+    border: solid 2px black;
+    border-radius: 5px;
+    font-size: 25px;
+    padding: 23px 15px;
+}
+
+.compact-item-data {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-end;
+    flex: 1;
+    align-items: center;
+}
+
+.compact-item-data .compact-item-data-item {
+    padding: 8px 20px;
+    height: 100%;
+    border: solid 2px black;
+    border-radius: 5px;
+    font-size: larger;
+    display: block;
+}
+
+.compact-item-data-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
