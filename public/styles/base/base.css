@@ -1,14 +1,24 @@
 /* Cores */
-:root {
+@import url('https://fonts.cdnfonts.com/css/applied-sans-pro');
 
+:root {
+  --background:   #faf5ff;
+  --primary:      #8705fb;
+  --primary-bg:   #8804fb0d;
+  --secondary:    #fd7d9b;
+  --secondary-2:  #ffafc2;
+  --secondaty-bg: #fd7c9a1a;
+  --accent:       #fc583d;
+  --text:         #0c0018;
 }
 
 body {
   font-family: "monospace";
   position: relative;
-  color: var(--text-color--gray--light);
+  color: var(--text);
   line-height: 1;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--background);
 }
 
 /* Reset */
