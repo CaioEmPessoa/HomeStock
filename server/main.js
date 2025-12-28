@@ -11,10 +11,12 @@ debug("Starting app...");
 
 const app = express();
 
-// Middleware 
+// Static files
 app.use(
   express.static(join(ROOT, "public"))
 )
+
+// Middleware 
 app.use(
   morgan('dev')
 );
@@ -26,7 +28,7 @@ app.get('/', (req, res) => {
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).send('<h1> Erro 404. </h1>', { root: ROOT });
+  res.status(404).send('<h1> Erro 404. </h1>');
 });
 
 app.listen(PORT, () => {
