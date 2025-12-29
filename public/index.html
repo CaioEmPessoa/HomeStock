@@ -75,21 +75,29 @@
                         <div class="new-produtct">
                             <button class="new-product-button">+ Novo Produto</button>
                         </div>
-                        <div class="reload-products-list">
-                            <a href="#">
-                                <img src="/src/imgs/refresh.png" alt="refresh">
-                            </a>
-                        </div>
                     </div>
                     <div class="products-filters-right">
                         <div class="compact-list-view">
                             <button class="compact-list-view-button">
-                                <img src="/src/imgs/list-icon.png" alt="list mode">
+                                <svg class="compact-list-icon" version="1.1" viewBox="0 0 248.862 248.863" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <path d="M31.87,63.729h185.125c17.576,0,31.861-14.292,31.861-31.864C248.856,14.31,234.571,0,216.995,0H31.87 C14.297,0,0.006,14.303,0.006,31.865C0.012,49.438,14.297,63.729,31.87,63.729z"/>
+                                            <path d="M216.995,185.127H31.87c-17.573,0-31.864,14.292-31.864,31.868c0,17.552,14.292,31.867,31.864,31.867h185.125 c17.576,0,31.861-14.304,31.861-31.867C248.856,199.431,234.565,185.127,216.995,185.127z"/>
+                                            <path d="M216.995,92.573H31.87c-17.573,0-31.864,14.295-31.864,31.858c0,17.57,14.292,31.868,31.864,31.868h185.125 c17.576,0,31.861-14.298,31.861-31.868C248.856,106.868,234.565,92.573,216.995,92.573z"/>
+                                        </g>
+                                    </g>
+                                </svg>
                             </button>
                         </div>
                         <div class="card-list-view">
                             <button class="card-list-view-button">
-                                <img src="src/imgs/cards-icon.png" alt="cards mode">
+                                <svg class="card-list-view-icon" viewBox="0 0 606.877 606.877">
+                                    <path d="M58.64,280.154h162.654c32.058,0,58.14-26.082,58.14-58.14V59.36c0-32.059-26.082-58.14-58.14-58.14H58.64 C26.582,1.22,0.5,27.301,0.5,59.36v162.654C0.5,254.072,26.582,280.154,58.64,280.154z"/>
+                                    <path d="M548.238,1.22H385.584c-32.059,0-58.141,26.082-58.141,58.14v162.654c0,32.058,26.082,58.14,58.141,58.14h162.654 c32.059,0,58.139-26.082,58.139-58.14V59.36C606.377,27.301,580.297,1.22,548.238,1.22z"/>
+                                    <path d="M58.64,605.657h162.654c32.058,0,58.14-26.08,58.14-58.139V384.864c0-32.059-26.082-58.141-58.14-58.141H58.64 c-32.058,0-58.14,26.082-58.14,58.141v162.654C0.5,579.577,26.582,605.657,58.64,605.657z"/>
+                                    <path d="M548.238,326.724H385.584c-32.059,0-58.141,26.082-58.141,58.141v162.654c0,32.059,26.082,58.139,58.141,58.139h162.654 c32.059,0,58.139-26.08,58.139-58.139V384.864C606.377,352.806,580.297,326.724,548.238,326.724z"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -109,13 +117,27 @@
 
                         <!-- CONTROLE DE ESTOQUE ( - [ ] + ) -->
                         <div class="compact-item-stock">
-                            <button class="compact-item-stock-remove">-</button>
-                            <input class="compact-item-stock-edit"></input>
-                            <button class="compact-item-stock-increase">+</button>
-                        </div>
+                            <button class="compact-item-stock-remove">
+                                <svg class="compact-item-stock-remove-icon" viewBox="0 -12 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                            <g sketch:type="MSLayerGroup" transform="translate(-414.000000, -1049.000000)" fill="#000000">
+                                                <path d="M442,1049 L418,1049 C415.791,1049 414,1050.79 414,1053 C414,1055.21 415.791,1057 418,1057 L442,1057 C444.209,1057 446,1055.21 446,1053 C446,1050.79 444.209,1049 442,1049" id="minus" sketch:type="MSShapeGroup">
 
-                        <div class="compact-item-actions">
-                            <button class="compact-item-actions-more">...</button>
+                                    </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                            </button>
+                            <input class="compact-item-stock-edit"></input>
+                            <button class="compact-item-stock-increase">
+                                <svg class="compact-item-stock-increase-icon" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                        <g sketch:type="MSLayerGroup" transform="translate(-362.000000, -1037.000000)" >/
+                                            <path d="M390,1049 L382,1049 L382,1041 C382,1038.79 380.209,1037 378,1037 C375.791,1037 374,1038.79 374,1041 L374,1049 L366,1049 C363.791,1049 362,1050.79 362,1053 C362,1055.21 363.791,1057 366,1057 L374,1057 L374,1065 C374,1067.21 375.791,1069 378,1069 C380.209,1069 382,1067.21 382,1065 L382,1057 L390,1057 C392.209,1057 394,1055.21 394,1053 C394,1050.79 392.209,1049 390,1049" sketch:type="MSShapeGroup">                                                </path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
                         </div>
 
                         <div class="compact-item-data">
@@ -132,7 +154,16 @@
                                 <div class="compact-item-data-data">1293910</div>
                             </div>
                         </div>
+
+                        <div class="compact-item-actions">
+                            <button class="compact-item-actions-more">
+                                <svg viewBox="0 0 16 16" class="compact-item-actions-more">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+
                     <div class="product-compact-list-item">
 
                         <!-- INFO DO PRODUTO ( [] ~~~ ) -->
@@ -143,13 +174,27 @@
 
                         <!-- CONTROLE DE ESTOQUE ( - [ ] + ) -->
                         <div class="compact-item-stock">
-                            <button class="compact-item-stock-remove">-</button>
-                            <input class="compact-item-stock-edit"></input>
-                            <button class="compact-item-stock-increase">+</button>
-                        </div>
+                            <button class="compact-item-stock-remove">
+                                <svg class="compact-item-stock-remove-icon" viewBox="0 -12 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                            <g sketch:type="MSLayerGroup" transform="translate(-414.000000, -1049.000000)" fill="#000000">
+                                                <path d="M442,1049 L418,1049 C415.791,1049 414,1050.79 414,1053 C414,1055.21 415.791,1057 418,1057 L442,1057 C444.209,1057 446,1055.21 446,1053 C446,1050.79 444.209,1049 442,1049" id="minus" sketch:type="MSShapeGroup">
 
-                        <div class="compact-item-actions">
-                            <button class="compact-item-actions-more">...</button>
+                                    </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                            </button>
+                            <input class="compact-item-stock-edit"></input>
+                            <button class="compact-item-stock-increase">
+                                <svg class="compact-item-stock-increase-icon" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                        <g sketch:type="MSLayerGroup" transform="translate(-362.000000, -1037.000000)" >/
+                                            <path d="M390,1049 L382,1049 L382,1041 C382,1038.79 380.209,1037 378,1037 C375.791,1037 374,1038.79 374,1041 L374,1049 L366,1049 C363.791,1049 362,1050.79 362,1053 C362,1055.21 363.791,1057 366,1057 L374,1057 L374,1065 C374,1067.21 375.791,1069 378,1069 C380.209,1069 382,1067.21 382,1065 L382,1057 L390,1057 C392.209,1057 394,1055.21 394,1053 C394,1050.79 392.209,1049 390,1049" sketch:type="MSShapeGroup">                                                </path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
                         </div>
 
                         <div class="compact-item-data">
@@ -166,76 +211,18 @@
                                 <div class="compact-item-data-data">1293910</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="product-compact-list-item">
-
-                        <!-- INFO DO PRODUTO ( [] ~~~ ) -->
-                        <div class="compact-item-info">
-                            <img class="compact-item-icon" src="https://placehold.co/125x125" alt="#">
-                            <p class="compact-item-name">Nome do Produto</p>
-                        </div>
-
-                        <!-- CONTROLE DE ESTOQUE ( - [ ] + ) -->
-                        <div class="compact-item-stock">
-                            <button class="compact-item-stock-remove">-</button>
-                            <input class="compact-item-stock-edit"></input>
-                            <button class="compact-item-stock-increase">+</button>
-                        </div>
 
                         <div class="compact-item-actions">
-                            <button class="compact-item-actions-more">...</button>
-                        </div>
-
-                        <div class="compact-item-data">
-                            <div class="compact-item-data-item">
-                                <div class="compact-item-data-title">Data de Fabricação:</div>
-                                <div class="compact-item-data-data">dd/mm/yyyy</div>
-                            </div>
-                            <div class="compact-item-data-item">
-                                <div class="compact-item-data-title">Data de Validade:</div>
-                                <div class="compact-item-data-data">dd/mm/yyyy</div>
-                            </div>
-                            <div class="compact-item-data-item">
-                                <div class="compact-item-data-title">Codigo de Barras:</div>
-                                <div class="compact-item-data-data">1293910</div>
-                            </div>
+                            <button class="compact-item-actions-more">
+                                <svg viewBox="0 0 16 16" class="compact-item-actions-more">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <div class="product-compact-list-item">
 
-                        <!-- INFO DO PRODUTO ( [] ~~~ ) -->
-                        <div class="compact-item-info">
-                            <img class="compact-item-icon" src="https://placehold.co/125x125" alt="#">
-                            <p class="compact-item-name">Nome do Produto</p>
-                        </div>
-
-                        <!-- CONTROLE DE ESTOQUE ( - [ ] + ) -->
-                        <div class="compact-item-stock">
-                            <button class="compact-item-stock-remove">-</button>
-                            <input class="compact-item-stock-edit"></input>
-                            <button class="compact-item-stock-increase">+</button>
-                        </div>
-
-                        <div class="compact-item-actions">
-                            <button class="compact-item-actions-more">...</button>
-                        </div>
-
-                        <div class="compact-item-data">
-                            <div class="compact-item-data-item">
-                                <div class="compact-item-data-title">Data de Fabricação:</div>
-                                <div class="compact-item-data-data">dd/mm/yyyy</div>
-                            </div>
-                            <div class="compact-item-data-item">
-                                <div class="compact-item-data-title">Data de Validade:</div>
-                                <div class="compact-item-data-data">dd/mm/yyyy</div>
-                            </div>
-                            <div class="compact-item-data-item">
-                                <div class="compact-item-data-title">Codigo de Barras:</div>
-                                <div class="compact-item-data-data">1293910</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
             </div>
         </div>
     </div>

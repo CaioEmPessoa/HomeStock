@@ -4,7 +4,8 @@
     margin: 35px 5% 0px 5%;
     padding: 25px 25px;
     border-radius: 10px;
-    background-color: var(--primary-bg);
+    background: linear-gradient(180deg,var(--primary-bg) 50%, var(--secondary-bg) 100%);
+
 }
 
 /* PRODUCTS FILTERS */
@@ -95,11 +96,29 @@
     gap: 15px;
 }
 
-.products-filters-right img {
+.products-filters-right img,
+.products-filters-right svg
+{
     max-width: 50px;
 }
 
+.compact-list-icon {
+    fill: var(--secondary);
+    width: 40px;
+    height: 40px;
+}
+
+.card-list-view-icon {
+    fill: var(--secondary);
+    width: 40px;
+    height: 40px;
+}
+
 /* LISTAGEM DOS PRODUTOS */
+.products-compact-list {
+    margin-top: 20px;
+    padding-top: 15px;
+}
 
 .product-compact-list-item {
     display: flex;
@@ -111,7 +130,6 @@
 .compact-item-info {
     display: flex;
     padding: 10px;
-    border: 2px solid black;
     border-radius: 5px;
     gap: 15px;
     align-items: center;
@@ -119,7 +137,6 @@
 }
 
 .compact-item-info .compact-item-icon {
-    border: solid 1px black;
     border-radius: 5px;
     max-width: 50px;
 }
@@ -128,38 +145,10 @@
     font-size: larger;
 }
 
-.compact-item-stock {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.compact-item-stock .compact-item-stock-remove, .compact-item-stock .compact-item-stock-increase {
-    font-size: 50px;
-}
-
-.compact-item-stock .compact-item-stock-remove {
-    color: red;
-}
-
-.compact-item-stock .compact-item-stock-increase {
-    color: limegreen;
-}
-
-.compact-item-stock .compact-item-stock-edit {
-    font-size: 25px;
-    max-width: 50px;
-    padding: 5px;
-}
-
 .compact-item-actions .compact-item-actions-more {
-    border: solid 2px black;
-    border-radius: 5px;
-    font-size: 25px;
-    padding: 23px 15px;
+    fill: var(--primary);
+    width: 60px;
+    height: 60px;
 }
 
 .compact-item-data {
@@ -174,7 +163,6 @@
 .compact-item-data .compact-item-data-item {
     padding: 8px 20px;
     height: 100%;
-    border: solid 2px black;
     border-radius: 5px;
     font-size: larger;
     display: block;
@@ -183,4 +171,43 @@
 .compact-item-data-title {
     font-size: 14px;
     margin-bottom: 8px;
+}
+
+.compact-item-stock {
+    display: flex;
+    align-items: center;
+    border: solid 2px var(--secondary-2);
+    background-color: var(--secondary-bg);
+    gap: 15px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.compact-item-stock .compact-item-stock-remove, .compact-item-stock .compact-item-stock-increase {
+    font-size: 50px;
+}
+
+.compact-item-stock .compact-item-stock-edit {
+    font-size: 25px;
+    max-width: 50px;
+    padding: 5px;
+    border: solid 2px var(--secondary-2);
+}
+
+.compact-item-stock-edit:focus-within {
+    border: solid 2px var(--secondary-2);
+	outline: none;
+	outline-offset: none;
+}
+
+.compact-item-stock-increase-icon,
+.compact-item-stock-remove-icon
+{
+    width: 150px;
+    height: 50px;
+}
+.compact-item-stock-increase-icon g,
+.compact-item-stock-remove-icon g
+{
+    fill: var(--secondary);
 }
