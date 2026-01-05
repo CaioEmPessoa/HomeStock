@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan')
 const { join } = require('path')
 
-const { debug } = require('./logs')
+const { debug } = require('./utilities/logs');
+const controllers_index = require('./controllers/controllers_index');
 
 const PORT = 2469;
 const ROOT = join(__dirname, "..");
@@ -21,15 +22,10 @@ app.use(
   morgan('dev')
 );
 
-// Pages
-app.get('/', (req, res) => {
-  res.sendFile('/public/index.html', { root: ROOT });
-});
+controllers_index(
+  app, ROOT
+);
 
-// 404 page
-app.use((req, res) => {
-  res.status(404).send('<h1> Erro 404. </h1>');
-});
 
 app.listen(PORT, () => {
   
