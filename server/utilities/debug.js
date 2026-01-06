@@ -1,10 +1,12 @@
 
+const { join } = require('path')
+
 class Debug {
 
     /**
      * Debug logging. Prints only when running on debug mode.
      * @param {msg} msg - The message to print
-     * @param {'ERROR'|'MSG'} type - Message type. Defaults to 'MSG'
+     * @param {'ERROR'|'MSG'|'RAW'} type - Message type. Defaults to 'MSG'
      */
     log (msg, type) {
         const now = new Date();
@@ -19,11 +21,21 @@ class Debug {
             case "ERROR":
                 console.log(`*ERROR* ${hour} - ${msg}`);
                 break
+            case "RAW":
+                console.log(msg);
+                break
 
             default:
                 console.log(`LOG ${hour} - ${msg}`);
         }
 
+    }
+
+    /**
+     * Returns project root path.
+     */
+    getRoot() {
+        return join(__dirname, "../..");
     }
 }
 
