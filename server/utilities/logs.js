@@ -1,8 +1,12 @@
 
 class Debug {
-    // msg = message to be logged in
-    // raw = is message printed formatted or raw. Defaults to False
-    log (msg, raw) {
+
+    /**
+     * Debug logging. Prints only when running on debug mode.
+     * @param {msg} msg - The message to print
+     * @param {'ERROR'|'MSG'} type - Message type. Defaults to 'MSG'
+     */
+    log (msg, type) {
         const now = new Date();
         const hour = now.toLocaleTimeString('pt-BR', {
             hour: '2-digit',
@@ -11,9 +15,15 @@ class Debug {
             hour12: false
         });
 
-        raw = raw ? true : false; // Valor padrão para raws
+        switch (type) {
+            case "ERROR":
+                console.log(`*ERROR* ${hour} - ${msg}`);
+                break
 
-        console.log( raw ? msg : `LOG ${hour} - ${msg}`);
+            default:
+                console.log(`LOG ${hour} - ${msg}`);
+        }
+
     }
 }
 
