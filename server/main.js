@@ -2,13 +2,14 @@ const express = require('express');
 const morgan = require('morgan')
 const { join } = require('path')
 
-const debug = require('./utilities/logs');
+const debug = require('./utilities/debug');
 const controllers_index = require('./controllers/controllers_index');
 
-const PORT = 2469;
+const PORT = process.env.PORT;
 const ROOT = join(__dirname, "..");
 
 debug.log("Starting app...");
+
 
 const app = express();
 
@@ -29,6 +30,7 @@ controllers_index(
 
 app.listen(PORT, () => {
 
+  debug.log(">================================<", "RAW");
   debug.log("Start finished!");
   debug.log(`RUNNING AT: http://localhost:${PORT}`);
   debug.log("ROOT PATH : " + ROOT);
