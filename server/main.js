@@ -4,12 +4,14 @@ const { join } = require('path')
 
 const debug = require('./utilities/debug');
 const controllers_index = require('./controllers/controllers_index');
+const registersIndex = require('./registers/registers_index');
 
 const PORT = process.env.PORT;
 const ROOT = join(__dirname, "..");
 
 debug.log("Starting app...");
 
+registersIndex.init();
 
 const app = express();
 
