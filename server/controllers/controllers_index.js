@@ -1,11 +1,14 @@
 
+const debug = require('../utilities/debug');
 const publishPages = require('./public_pages');
 
 function init(app, ROOT) {
 
+  debug.log("Publishing pages ...");
   // Adding public pages into app, with their paths.
   publishPages(app, ROOT);
 
+  debug.log("Publishing APIs ...");
   // adding API controllers
 
   // 404 page
