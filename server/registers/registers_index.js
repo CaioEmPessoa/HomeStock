@@ -36,6 +36,8 @@ init() {
 
             debug.log("Start creating tables...")
 
+            category_register.init(boundQuerySQL);
+            category_register.createTable();
 
             debug.log("Finished creating tables!")
         });
