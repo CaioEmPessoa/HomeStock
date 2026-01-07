@@ -11,30 +11,32 @@ const ROOT = join(__dirname, "..");
 
 debug.log("Starting app...");
 
-registersIndex.init();
+registersIndex.init().then(() => {
 
-const app = express();
+  const app = express();
 
-// Static files
-app.use(
-  express.static(join(ROOT, "public"))
-)
+  // Static files
+  app.use(
+    express.static(join(ROOT, "public"))
+  );
 
-// Middleware
-app.use(
-  morgan('dev')
-);
+  // Middleware
+  app.use(
+    morgan('dev')
+  );
 
-controllers_index(
-  app, ROOT
-);
+  controllers_index(
+    app, ROOT
+  );
 
 
-app.listen(PORT, () => {
+  app.listen(PORT, () => {
 
-  debug.log(">================================<", "RAW");
-  debug.log("Start finished!");
-  debug.log(`RUNNING AT: http://localhost:${PORT}`);
-  debug.log("ROOT PATH : " + ROOT);
+    debug.log(">================================<", "RAW");
+    debug.log("Start finished!");
+    debug.log(`RUNNING AT: http://localhost:${PORT}`);
+    debug.log("ROOT PATH : " + ROOT);
+
+  });
 
 });
