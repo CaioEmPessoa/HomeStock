@@ -1,14 +1,15 @@
 const debug = require('../utilities/debug');
 
-class categoryRegister {
-    init(query) {
-        this.query = query
-    }
+const registers_base = require('./register_base');
 
-    createTable() {
-        debug.log("Creating category table...")
-        const sql = `
-            CREATE TABLE IF NOT EXISTS categories (
+class categoryRegister extends registers_base {
+    constructor(connection){
+        super();
+        this.connection = connection;
+
+        const tableName = "categories";
+        const createTableQuery = `
+            CREATE TABLE IF NOT EXISTS ${tableName} (
                 category_id INT NOT NULL AUTO_INCREMENT,
                 category_name VARCHAR(100),
                 category_image VARCHAR(300),
@@ -17,17 +18,10 @@ class categoryRegister {
             );
         `;
 
-        this.query(sql, "Created category table.");
+        this.createTableQuery = createTableQuery;
+        this.tableName = tableName;
     }
 
-    getAll() {
-        const sql = `
-            SELECT * FROM categories;
-        `;
-
-        let response = this.query(sql);
-        console.log(response)
-    }
 }
 
-module.exports = new categoryRegister();
+module.exports = categoryRegister;
