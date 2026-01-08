@@ -31,6 +31,18 @@ class Debug {
 
     }
 
+    logMsg(msg) {
+        this.log(msg, "MSG")
+    }
+
+    logError(msg) {
+        this.log(msg, "ERROR")
+    }
+
+    logRaw(msg) {
+        this.log(msg, "RAW")
+    }
+
     /**
      * Returns project root path.
      */
