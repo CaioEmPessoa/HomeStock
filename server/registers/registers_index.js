@@ -10,6 +10,8 @@ class registersIndex {
         return new Promise((resolve, reject) => {
         debug.log("Starting connection...");
 
+        this.registers = {};
+
         this.connection = mysql.createConnection({
             host: process.env.DATABASE_HOST,
             port: process.env.DATABASE_PORT || 3306,
@@ -36,18 +38,15 @@ class registersIndex {
             this.testConnection().then(() => {
                 // --------- START CREATING TABLES --------
                 debug.log("Start creating tables...");
-                const category_register = new categoryRegister(this.connection);
-                const roles_register = new rolesRegister(this.connection);
+                this.registers.category_register = new categoryRegister(this.connection);
+                this.registers.category_register.createTable();
 
-                category_register.createTable();
-                roles_register.createTable();
+                this.registers.roles_register = new rolesRegister(this.connection);
+                this.registers.roles_register.createTable();
 
                 debug.log("Finished creating tables!");
 
-                resolve({
-                    category_register,
-                    roles_register
-                }); // END OF REGISTERS INDEX INITIATION.
+                resolve(this.registers);
             });
         });
         })
