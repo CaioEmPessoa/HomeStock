@@ -11,7 +11,7 @@ const ROOT = join(__dirname, "..");
 
 debug.log("Starting app...");
 
-registersIndex.init().then(() => {
+registersIndex.init().then((tables) => {
 
   const app = express();
 
@@ -26,7 +26,7 @@ registersIndex.init().then(() => {
   );
 
   controllers_index(
-    app, ROOT
+    app, ROOT, tables
   );
 
 

@@ -20,14 +20,14 @@ class registersIndex {
 
         this.connection.connect((err) => {
             if (err) {
-                debug.log(`Connection FAILED: ${err.code} - ${err.message}`, "ERROR");
+                debug.logError(`Connection FAILED: ${err.code} - ${err.message}`);
 
                 if (err.code === 'ECONNREFUSED') {
-                    debug.log("MariaDB server is not running or not accessible!", "ERROR");
+                    debug.logError("MariaDB server is not running or not accessible!");
                 } else if (err.code === 'ER_ACCESS_DENIED_ERROR') {
-                    debug.log("Invalid username/password!", "ERROR");
+                    debug.logError("Invalid username/password!");
                 } else if (err.code === 'ER_BAD_DB_ERROR') {
-                    debug.log("Database doesn't exist!", "ERROR");
+                    debug.logError("Database doesn't exist!");
                 }
             }
             debug.log("Connection established successfully!");
@@ -44,7 +44,10 @@ class registersIndex {
 
                 debug.log("Finished creating tables!");
 
-                resolve(); // END OF REGISTERS INDEX INITIATION.
+                resolve({
+                    category_register,
+                    roles_register
+                }); // END OF REGISTERS INDEX INITIATION.
             });
         });
         })
@@ -54,7 +57,7 @@ class registersIndex {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT 1+1 AS test', (error, results) => {
                 if (error) {
-                    debug.log(`Connection failed: "${error.message}"`, "ERROR");
+                    debug.logError(`Connection failed: "${error.message}"`);
                     reject(error);
                 } else {
                     debug.log(`Queries working!`);
