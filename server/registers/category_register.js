@@ -4,9 +4,6 @@ const registers_base = require('./register_base');
 
 class categoryRegister extends registers_base {
     constructor(connection){
-        super();
-        this.connection = connection;
-
         const tableName = "categories";
         const createTableQuery = `
             CREATE TABLE IF NOT EXISTS ${tableName} (
@@ -18,8 +15,7 @@ class categoryRegister extends registers_base {
             );
         `;
 
-        this.createTableQuery = createTableQuery;
-        this.tableName = tableName;
+        super(connection, createTableQuery, tableName);
     }
 
 }

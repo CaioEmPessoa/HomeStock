@@ -4,8 +4,6 @@ const registers_base = require('./register_base');
 
 class categoryRegister extends registers_base {
     constructor(connection){
-        super();
-        this.connection = connection;
 
         const tableName = "roles";
         const createTableQuery = `
@@ -17,8 +15,7 @@ class categoryRegister extends registers_base {
             );
         `;
 
-        this.createTableQuery = createTableQuery;
-        this.tableName = tableName;
+        super(connection, createTableQuery, tableName);
     }
 
 }
