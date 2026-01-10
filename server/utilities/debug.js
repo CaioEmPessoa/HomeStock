@@ -7,7 +7,7 @@ class Debug {
      * Debug logging. Prints only when running on debug mode.
      * @param {msg} msg - The message to print
      * @param {'ERROR'|'MSG'|'RAW'} type - Message type. Defaults to 'MSG'
-     */
+    **/
     log (msg, type) {
         const now = new Date();
         const hour = now.toLocaleTimeString('pt-BR', {
