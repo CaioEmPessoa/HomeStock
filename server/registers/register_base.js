@@ -53,12 +53,12 @@ class RegisterBase {
 
     /**
      * Save values into current table.
-     * @param {[{columnName: "str", columnValue: "str"}]} entity - Entity data to save into this current table.
+     * @param {{columnName: "colmnValue"}} entity - Entity data to save into this current table.
     **/
     async save(entity) {
         debug.log(`Saving into ${this.tableName}...`);
-        let sql = `INSERT INTO ${this.tableName} (${entity.map(el => el.columnName)}) `;
-        sql    += `VALUES (${entity.map(el => ` '${el.columnValue}'`)} )`;
+        let sql  = `INSERT INTO ${this.tableName} ( ${Object.keys(entity)} ) `;
+            sql += `VALUES ( '${Object.values(entity).join("', '")}' );`;
 
         try {
             const response = await this.querySQL(sql, `Saved into ${this.tableName}!`);
@@ -69,6 +69,10 @@ class RegisterBase {
             debug.logError(`SQL Query: ${sql}`);
             throw error;
         }
+    }
+
+    async delete(entity) {
+
     }
 
 }

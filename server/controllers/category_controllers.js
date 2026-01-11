@@ -17,14 +17,7 @@ class categoryController extends controllers_base {
     });
 
     this.app.get("/api/category/new", async (req, res) => {
-      const schema = Joi.array().items(
-        Joi.object(
-          {
-            columnName: Joi.string().required(),
-            columnValue: Joi.string().required()
-          }
-        )
-      );
+      const schema = Joi.object().required();
 
       if ( this.validateJoi(schema, res, req) ) return;
 
