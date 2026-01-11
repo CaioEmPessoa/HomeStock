@@ -1,18 +1,44 @@
+const Joi = require('joi');
+const controllers_base = require("./controllers_base");
 
 const categoryService = require('../services/category_service');
 
-function categoryControllers(app, tables) {
+class categoryController extends controllers_base {
+  constructor(app, tables) {
+    super(app, tables, categoryService);
+  }
 
-  const category_service = new categoryService(tables);
+  initRequests() {
 
-  app.get("/api/category/list", async (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
+    this.app.get("/api/category/list", async (req, res) => {
+      const result = await this.service.getAll();
 
-    const result = await category_service.getAll();
+      res.json(result);
+    });
 
-    res.end(JSON.stringify(result));
-  });
+    this.app.get("/api/category/new", async (req, res) => {
+      const schema = Joi.array().items(
+        Joi.object(
+          {
+            columnName: Joi.string().required(),
+            columnValue: Joi.string().required()
+          }
+        )
+      );
+
+      if ( this.validateJoi(schema, res, req) ) return;
+
+      try {
+        const result = await this.service.save(req.body);
+        res.json(result);
+      } catch (error) {
+        res.status(500).json(error);
+      }
+
+    });
+
+  }
 
 }
 
-module.exports = categoryControllers;
+module.exports = categoryController;
