@@ -1,3 +1,4 @@
+const express = require('express');
 
 const debug = require('../utilities/debug');
 const publishPages = require('./public_pages');
@@ -12,7 +13,9 @@ function init(app, ROOT, tables) {
 
   debug.log("Publishing APIs ...");
   // adding API controllers
+  app.use(express.json());
   const categoryControllers = new category_controllers(app, tables);
+  categoryControllers.initRequests();
 
   // 404 page
   app.use((req, res) => {
