@@ -52,6 +52,17 @@ class RegisterBase {
         }
     }
 
+    async getById(id) {
+        const sql = `SELECT * FROM ${this.tableName} WHERE ${this.tableIdField} = ${id}`;
+        try {
+            const response = await this.querySQL(sql, `Fetched all ${this.tableName}`);
+            return response;
+        } catch (error) {
+            debug.logError(`Error fetching ${this.tableName}: ${error}`);
+            throw error;
+        }
+    }
+
     /**
      * Save values into current table.
      * @param {{columnName: "colmnValue"}} entity - Entity data to save into this current table.
@@ -96,8 +107,20 @@ class RegisterBase {
         }
     }
 
-    async delete(entity) {
+    async delete(id) {
+        debug.log(`Deleting from ${this.tableName}...`);
 
+        let sql = `DELETE FROM ${this.tableName} WHERE ${this.tableIdField} = ${id}`
+
+        try {
+            const response = await this.querySQL(sql, `Deleted from ${this.tableName}!`);
+            debug.log(`Deleted from ${this.tableName}!`);
+            return response;
+        } catch (error) {
+            debug.logError(`Error deleting from ${this.tableName}: ${error}`);
+            debug.logError(`SQL Query: ${sql}`);
+            throw error;
+        }
     }
 
 }

@@ -7,6 +7,29 @@ class category_service {
         this.category_register = tables.category_register;
     }
 
+    async getById(id) {
+        debug.log("Category -> getById()");
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await this.category_register.getById(id);
+
+                if (result == false) {
+                    const api_return = apiReturn.success(null, "No category found!");
+                    return resolve(api_return);
+                }
+
+                const api_return = apiReturn.success(null, "Category found successfully!", result);
+                resolve(api_return);
+            }
+            catch (error) {
+                debug.logError("Error on Category -> getById()");
+                debug.logError(`ERROR: ${error}`);
+                reject(apiReturn.errorInternal());
+            }
+        })
+
+    }
+
     async getAll() {
         debug.log("Category -> getAll()");
         return new Promise(async (resolve, reject) => {
@@ -55,6 +78,30 @@ class category_service {
                 debug.logError(`ERROR: ${error}`);
 
                 reject(apiReturn.errorBadRequest(`Error on update! ${error.sqlMessage}`));
+            }
+        })
+    }
+
+    async delete(id) {
+        debug.log("Category -> delete()");
+        return new Promise(async (resolve, reject) => {
+            try {
+                const search = await this.category_register.getById(id);
+                if (search == false) {
+                    const api_return = apiReturn.success(null, "No category found!");
+                    return resolve(api_return);
+                }
+
+                const result = await this.category_register.delete(id);
+
+                const api_return = apiReturn.success(null, "Successfully deleted!");
+                resolve(api_return);
+            }
+            catch (error) {
+                debug.logError("Error on Category -> delete()");
+                debug.logError(`ERROR: ${error}`);
+
+                reject(apiReturn.errorBadRequest(`Error on delete! ${error.sqlMessage}`));
             }
         })
     }
