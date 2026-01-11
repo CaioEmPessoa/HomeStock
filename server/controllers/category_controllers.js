@@ -30,6 +30,20 @@ class categoryController extends controllers_base {
 
     });
 
+    this.app.get("/api/category/:id/update", async (req, res) => {
+      const schema = Joi.object().required();
+
+      if ( this.validateJoi(schema, res, req) ) return;
+
+      try {
+        const result = await this.service.update(req.body, req.params.id);
+        res.json(result);
+      } catch (error) {
+        res.status(500).json(error);
+      }
+
+    });
+
   }
 
 }

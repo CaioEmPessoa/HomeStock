@@ -42,6 +42,23 @@ class category_service {
         })
     }
 
+    async update(obj, id) {
+        debug.log("Category -> update()");
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await this.category_register.update(obj, id);
+                const api_return = apiReturn.success(null, "Successfully saved!", result);
+                resolve(api_return);
+            }
+            catch (error) {
+                debug.logError("Error on Category -> update()");
+                debug.logError(`ERROR: ${error}`);
+
+                reject(apiReturn.errorBadRequest(`Error on update! ${error.sqlMessage}`));
+            }
+        })
+    }
+
 }
 
 module.exports = category_service;
