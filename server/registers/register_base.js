@@ -56,11 +56,13 @@ class RegisterBase {
      * @param {[{columnName: "str", columnValue: "str"}]} entity - Entity data to save into this current table.
     **/
     async save(entity) {
+        debug.log(`Saving into ${this.tableName}...`);
         let sql = `INSERT INTO ${this.tableName} (${entity.map(el => el.columnName)}) `;
         sql    += `VALUES (${entity.map(el => ` '${el.columnValue}'`)} )`;
 
         try {
             const response = await this.querySQL(sql, `Saved into ${this.tableName}!`);
+            debug.log(`Saved into ${this.tableName}!`);
             return response;
         } catch (error) {
             debug.logError(`Error saving into ${this.tableName}: ${error}`);
