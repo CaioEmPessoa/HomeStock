@@ -5,6 +5,7 @@ const registers_base = require('./register_base');
 class categoryRegister extends registers_base {
     constructor(connection){
         const tableName = "categories";
+        const tableIdField = "category_id";
         const createTableQuery = `
             CREATE TABLE IF NOT EXISTS ${tableName} (
                 category_id INT NOT NULL AUTO_INCREMENT,
@@ -15,7 +16,7 @@ class categoryRegister extends registers_base {
             );
         `;
 
-        super(connection, createTableQuery, tableName);
+        super(connection, createTableQuery, tableName, tableIdField);
     }
 
 }

@@ -2,7 +2,7 @@ const debug = require('../utilities/debug');
 
 class RegisterBase {
 
-    constructor(connection, createTableQuery, tableName){
+    constructor(connection, createTableQuery, tableName, tableIdField){
         if(connection == null) {
             debug.logError("Connection can't be null!");
             throw new Error("RegisterBase Error: Connection can't be null!");
@@ -14,6 +14,7 @@ class RegisterBase {
         this.connection = connection;
 
         this.createTableQuery = createTableQuery;
+        this.tableIdField = tableIdField;
         this.tableName = tableName;
 
     }
@@ -59,6 +60,30 @@ class RegisterBase {
         debug.log(`Saving into ${this.tableName}...`);
         let sql  = `INSERT INTO ${this.tableName} ( ${Object.keys(entity)} ) `;
             sql += `VALUES ( '${Object.values(entity).join("', '")}' );`;
+
+        try {
+            const response = await this.querySQL(sql, `Saved into ${this.tableName}!`);
+            debug.log(`Saved into ${this.tableName}!`);
+            return response;
+        } catch (error) {
+            debug.logError(`Error saving into ${this.tableName}: ${error}`);
+            debug.logError(`SQL Query: ${sql}`);
+            throw error;
+        }
+    }
+
+    async update(entity, id) {
+        debug.log(`Updating into ${this.tableName}...`);
+
+        let sql = `UPDATE ${this.tableName} SET `
+        let items = []
+
+        Object.keys(entity).forEach((el) => {
+            items.push(`${el} = '${entity[el]}'`);
+        })
+
+        sql += items.join(", ")
+        sql += ` WHERE ${this.tableIdField} = ${id} `
 
         try {
             const response = await this.querySQL(sql, `Saved into ${this.tableName}!`);
