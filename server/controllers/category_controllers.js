@@ -5,18 +5,19 @@ const categoryService = require('../services/category_service');
 
 class categoryController extends controllers_base {
   constructor(app, tables) {
-    super(app, tables, categoryService);
+    const apiUrl = "/api/category";
+    super(app, tables, categoryService, apiUrl);
   }
 
   initRequests() {
 
-    this.app.get("/api/category/list", async (req, res) => {
+    this.app.get(`${this.apiUrl}/list`, async (req, res) => {
       const result = await this.service.getAll();
 
       res.json(result);
     });
 
-    this.app.get("/api/category/new", async (req, res) => {
+    this.app.get(`${this.apiUrl}/new`, async (req, res) => {
       const schema = Joi.object().required();
 
       if ( this.validateJoi(schema, res, req) ) return;
@@ -30,7 +31,7 @@ class categoryController extends controllers_base {
 
     });
 
-    this.app.get("/api/category/:id", async (req, res) => {
+    this.app.get(`${this.apiUrl}/:id`, async (req, res) => {
       try {
         const result = await this.service.getById(req.params.id);
         res.json(result);
@@ -40,7 +41,7 @@ class categoryController extends controllers_base {
 
     });
 
-    this.app.get("/api/category/:id/update", async (req, res) => {
+    this.app.get(`${this.apiUrl}/:id/update`, async (req, res) => {
       const schema = Joi.object().required();
 
       if ( this.validateJoi(schema, res, req) ) return;
@@ -54,7 +55,7 @@ class categoryController extends controllers_base {
 
     });
 
-    this.app.get("/api/category/:id/delete", async (req, res) => {
+    this.app.get(`${this.apiUrl}/:id/delete`, async (req, res) => {
       try {
         const result = await this.service.delete(req.params.id);
         res.json(result);

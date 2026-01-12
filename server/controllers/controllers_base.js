@@ -3,9 +3,10 @@ const debug = require('../utilities/debug');
 
 class ControllersBase {
 
-    constructor(app, tables, service) {
+    constructor(app, tables, service, apiUrl) {
         this.app = app;
         this.service = new service(tables);
+        this.apiUrl = apiUrl;
     }
 
     validateJoi(schema, res, req) {
