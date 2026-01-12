@@ -51,7 +51,9 @@ class servicesBase {
         return new Promise(async (resolve, reject) => {
             try {
                 const result = await this.register.save(obj);
-                const api_return = apiReturn.success(null, "Successfully saved!", result);
+                const search = await this.register.getById(result.insertId);
+
+                const api_return = apiReturn.success(null, "Successfully saved!", search);
                 resolve(api_return);
             }
             catch (error) {
@@ -67,8 +69,20 @@ class servicesBase {
         debug.log(`${this.tableName} -> update()`);
         return new Promise(async (resolve, reject) => {
             try {
+                const search = await this.register.getById(id);
+                if (search == false) {
+                    const api_return = apiReturn.success(null, `No ${this.tableName.toLowerCase()} found!`);
+                    return resolve(api_return);
+                }
+
                 const result = await this.register.update(obj, id);
-                const api_return = apiReturn.success(null, "Successfully updated!", result);
+                const updatedSearch = await this.register.getById(id);
+
+                console.log(id);
+                console.log(search);
+
+
+                const api_return = apiReturn.success(null, "Successfully updated!", updatedSearch);
                 resolve(api_return);
             }
             catch (error) {
