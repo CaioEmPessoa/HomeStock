@@ -3,7 +3,8 @@ const express = require('express');
 const debug = require('../utilities/debug');
 const publishPages = require('./public_pages');
 
-const category_controllers = require('./category_controllers');
+const categoryController = require('./category_controllers');
+const rolesController = require('./roles_controller');
 
 function init(app, ROOT, tables) {
 
@@ -14,8 +15,11 @@ function init(app, ROOT, tables) {
   debug.log("Publishing APIs ...");
   // adding API controllers
   app.use(express.json());
-  const categoryControllers = new category_controllers(app, tables);
-  categoryControllers.initRequests();
+  const category_controllers = new categoryController(app, tables);
+  category_controllers.initRequests();
+
+  const roles_controller = new rolesController(app, tables);
+  roles_controller.initRequests();
 
   // 404 page
   app.use((req, res) => {
