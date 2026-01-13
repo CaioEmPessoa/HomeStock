@@ -8,11 +8,11 @@ const rolesController = require('./roles_controller');
 const productController = require('./product_controllers');
 const inventoryController = require('./inventory_controllers');
 
-function init(app, ROOT, tables) {
+function init(app, tables) {
 
   debug.log("Publishing pages ...");
   // Adding public pages into app, with their paths.
-  publishPages(app, ROOT);
+  publishPages(app);
 
   debug.log("Publishing APIs ...");
   // adding API controllers

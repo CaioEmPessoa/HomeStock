@@ -2,14 +2,14 @@
 const PUBLIC_PAGES = [
     {
         "webPath"  : "/",
-        "filePath" : "/public/index.html"
+        "filePath" : "index"
     }
 ];
 
-function publishPages(app, ROOT) {
+function publishPages(app) {
     PUBLIC_PAGES.forEach(el => {
     app.get(el.webPath, (req, res) => {
-      res.sendFile(el.filePath, { root: ROOT });
+      res.render(el.filePath);
     });
   });
 }

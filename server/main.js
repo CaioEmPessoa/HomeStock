@@ -15,6 +15,10 @@ registersIndex.init().then((tables) => {
 
   const app = express();
 
+  // Set view engine and views
+  app.set('view engine', 'ejs');
+  app.set('views', join(ROOT, "public/pages"));
+
   // Static files
   app.use(
     express.static(join(ROOT, "public"))
@@ -26,7 +30,7 @@ registersIndex.init().then((tables) => {
   );
 
   controllers_index(
-    app, ROOT, tables
+    app, tables
   );
 
 
