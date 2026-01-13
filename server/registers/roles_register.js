@@ -1,4 +1,3 @@
-const debug = require('../utilities/debug');
 
 const registers_base = require('./register_base');
 

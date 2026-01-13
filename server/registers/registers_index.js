@@ -3,6 +3,8 @@ const debug = require('../utilities/debug');
 
 const categoryRegister = require('./category_register');
 const rolesRegister    = require('./roles_register');
+const productsRegister = require('./product_register');
+const inventoryRegister = require('./inventory_register');
 
 class registersIndex {
 
@@ -43,6 +45,12 @@ class registersIndex {
 
                 this.registers.roles_register = new rolesRegister(this.connection);
                 this.registers.roles_register.createTable();
+
+                this.registers.products_register = new productsRegister(this.connection);
+                this.registers.products_register.createTable();
+
+                this.registers.inventory_register = new inventoryRegister(this.connection);
+                this.registers.inventory_register.createTable();
 
                 debug.log("Finished creating tables!");
 

@@ -5,6 +5,8 @@ const publishPages = require('./public_pages');
 
 const categoryController = require('./category_controllers');
 const rolesController = require('./roles_controller');
+const productController = require('./product_controllers');
+const inventoryController = require('./inventory_controllers');
 
 function init(app, ROOT, tables) {
 
@@ -20,6 +22,12 @@ function init(app, ROOT, tables) {
 
   const roles_controller = new rolesController(app, tables);
   roles_controller.initRequests();
+
+  const product_controller = new productController(app, tables);
+  product_controller.initRequests();
+
+  const inventory_controller = new inventoryController(app, tables);
+  inventory_controller.initRequests();
 
   // 404 page
   app.use((req, res) => {
