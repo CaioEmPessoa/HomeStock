@@ -5,15 +5,15 @@ meta {
 }
 
 get {
-  url: http://localhost:2469/api/category/new
+  url: http://localhost:2469/api/role/new
   body: json
   auth: inherit
 }
 
 body:json {
   {
-    "category_name": "Salgadinhos",
-    "category_image":"https://imagem.com"
+    "role_name": "teste",
+    "role_permission": 5
   }
 }
 

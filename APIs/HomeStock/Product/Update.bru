@@ -5,18 +5,18 @@ meta {
 }
 
 get {
-  url: http://localhost:2469/api/category/:id/update
+  url: http://localhost:2469/api/product/:id/update
   body: json
   auth: inherit
 }
 
 params:path {
-  id: 4
+  id: 3
 }
 
 body:json {
   {
-    "category_name": "Categoria legal!!"
+    "category_name": "teste"
   }
 }
 
