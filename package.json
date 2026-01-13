@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/CaioEmPessoa/HomeStock#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^5.2.1",
     "joi": "^18.0.2",
     "morgan": "^1.10.1",
