@@ -3,12 +3,13 @@ import Modal from "./modal.js";
 import FormQuestions from "./formQuestion.js";
 
 const novoProdutoModalForm = [
-    new FormQuestions("Teste").text(),
+    new FormQuestions("Qual seu nome?").text("nome"),
+    new FormQuestions("E sobrenome?").text("sobrenome"),
     new FormQuestions("Qual seu favorito?").select([
         "bolo",
         "pizza",
         "agua"
-    ], "teste")
+    ], "comida")
 ]
 
 const novoProdutoModal = new Modal(novoProdutoModalForm);
@@ -20,3 +21,8 @@ newProductButton.addEventListener( "click", () => {
     }
 )
 
+novoProdutoModal.modalForm.addEventListener("submit", () => {
+    let response = novoProdutoModal.confirm();
+
+    console.log(response)
+});

@@ -5,7 +5,7 @@ class FormQuestion {
         this.title = title;
     }
 
-    text() {
+    text(name="") {
 
         let modalFormQuestion = document.createElement('div');
         modalFormQuestion.classList.add("modal-form-question");
@@ -17,6 +17,7 @@ class FormQuestion {
         let modalQuestionInput = document.createElement('input');
         modalQuestionInput.classList.add("modal-question-input")
         modalQuestionInput.type = "text";
+        modalQuestionInput.name = name;
 
         modalFormQuestion.append(modalQuestionTitle);
         modalFormQuestion.append(modalQuestionInput);

@@ -8,6 +8,8 @@ class Modal {
     constructor (questions) {
         this.questions = questions;
         this.modal = this.createModal();
+
+        this.modalForm = this.modal.querySelector("form");
         this.bindEvents();
     }
 
@@ -34,7 +36,7 @@ class Modal {
         modalHeader.appendChild(modalCloseBtn);
 
         // Form
-        const modalForm = document.createElement('div');
+        const modalForm = document.createElement('form');
         modalForm.className = 'modal-form';
 
         this.questions.forEach(question => {
@@ -49,8 +51,9 @@ class Modal {
         this.cancelBtn.className = 'modal-cancel';
         this.cancelBtn.textContent = 'cancelar';
 
-        this.confirmBtn = document.createElement('button');
+        this.confirmBtn = document.createElement('input');
         this.confirmBtn.className = 'modal-confirm';
+        this.confirmBtn.type = 'submit';
         this.confirmBtn.textContent = 'confirmar';
 
         modalButtons.appendChild(this.cancelBtn);
@@ -59,19 +62,22 @@ class Modal {
         // Assemble
         modalBox.appendChild(modalHeader);
         modalBox.appendChild(modalForm);
-        modalBox.appendChild(modalButtons);
+        modalForm.appendChild(modalButtons);
+
         modalOverlay.appendChild(modalBox);
+
         document.body.appendChild(modalOverlay);
 
         return modalOverlay;
     }
 
     bindEvents() {
+
         const closeBtn = this.modal.querySelector('.modal-close');
         const cancelBtn = this.modal.querySelector('.modal-cancel');
 
         closeBtn.addEventListener('click', () => this.close());
-        cancelBtn.addEventListener('click', () => this.close());
+        cancelBtn.addEventListener('click', () => this.close(true));
 
         // Close when clicking outside modal
         this.modal.addEventListener('click', (e) => {
@@ -79,18 +85,35 @@ class Modal {
                 this.close();
             }
         });
+
+        this.modal.addEventListener('submit', (e) => {
+            e.preventDefault();
+        })
+
     }
 
     show() {
         this.modal.classList.remove('modal-box-hidden')
     }
 
-    close () {
-        this.modal.classList.add('modal-box-hidden')
+    reset() {
+        this.modalForm.reset()
+    }
+
+    close (reset) {
+        if(reset === true) this.reset();
+        this.modal.classList.add('modal-box-hidden');
     }
 
     confirm () {
+        const formData = new FormData(this.modalForm);
 
+        const formObject = Object.fromEntries(formData.entries());
+
+        this.reset();
+        this.close();
+
+        return formObject;
     }
 }
 
