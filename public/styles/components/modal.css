@@ -1,0 +1,76 @@
+
+.modal-box-hidden {
+    display: none;
+}
+
+.modal-box-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 1;
+}
+
+.modal-box {
+    display: block;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    background-color: var(--background);
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 19px;
+    width: 500px;
+}
+
+.modal-header {
+    margin-bottom: 20px;
+    font-size: 26px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-form-question {
+    margin-bottom: 25px;
+}
+
+.modal-question-title {
+    margin-bottom: 7px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+
+.modal-confirm {
+    background-color: var(--primary);
+    color: var(--text-alt);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.modal-cancel {
+    background-color: var(--accent);
+    color: var(--text-alt);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* MODAL OPTIONS */
+.modal-question-input {
+    width: 100%;
+    padding: 5px;
+}
+
+.modal-question-select-option {
+    margin-bottom: 5px;
+    display: flex;
+}
+.modal-question-select-option input {
+    margin-right: 5px;
+}
+.modal-question-select-option label {
+    width: 100%;
+}
