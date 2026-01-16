@@ -1,6 +1,6 @@
 
-import Modal from "./modal.js";
-import FormQuestions from "./formQuestion.js";
+import Modal from "../utils/modal.js";
+import FormQuestions from "../utils/formQuestion.js";
 
 const novoProdutoModalForm = [
     new FormQuestions("Qual seu nome?").text("nome"),
