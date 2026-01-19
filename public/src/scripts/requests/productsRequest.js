@@ -1,17 +1,21 @@
 
-import requestBase from "./requestsBase.js";
+import requestBase from "/src/scripts/requests/requestsBase.js";
 
-class ProductsRequest extends requestBase {
+class productsRequest extends requestBase {
     constructor() {
-        this.requestPath = "/api/product"
-        super(this.requestPath)
+        const requestPath = "/api/product";
+
+        super(requestPath)
     }
 
     getAll() {
         return new Promise((resolve, reject) => {
-            resolve(this.get("list"));
+            this.get("list").then((response) => {
+                let body = response.json()
+                resolve(body)
+            });
         });
     }
 }
 
-export default ProductsRequest;
+export default productsRequest;

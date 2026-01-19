@@ -1,9 +1,8 @@
 
-import api_path from "/env.json";
-
 class requestsBase {
     constructor (requestPath) {
-        this.url = `${api_path}/${requestPath}/`
+        const api_path = "localhost:2469"
+        this.url = `http://${api_path}${requestPath}/`
     }
 
     async get(path) {
@@ -13,6 +12,7 @@ class requestsBase {
                 "Content-Type": "application/json",
             },
         });
+
         return response;
     }
 
