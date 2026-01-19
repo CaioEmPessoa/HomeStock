@@ -5,33 +5,48 @@ import FormQuestions from "../utils/formQuestion.js";
 
 import productsRequest from "../requests/productsRequest.js";
 
-const products_request = new productsRequest();
+class index {
+    constructor() {
+        this.products_request = new productsRequest();
 
-const novoProdutoModalForm = [
-    new FormQuestions("Qual seu nome?").text("nome"),
-    new FormQuestions("E sobrenome?").text("sobrenome"),
-    new FormQuestions("Qual seu favorito?").select([
-        "bolo",
-        "pizza",
-        "agua"
-    ], "comida")
-]
+        this.staticElmnts();
+        this.dynamicElmnts();
+        this.addEvents();
 
-const novoProdutoModal = new Modal(novoProdutoModalForm);
+    }
 
-let newProductButton = document.querySelector(".new-product-button")
+    staticElmnts() {
+        const novoProdutoModalForm = [
+            new FormQuestions("Qual seu nome?").text("nome"),
+            new FormQuestions("E sobrenome?").text("sobrenome"),
+            new FormQuestions("Qual seu favorito?").select([
+                "bolo",
+                "pizza",
+                "agua"
+            ], "comida")
+        ]
 
-newProductButton.addEventListener( "click", () => {
-        novoProdutoModal.show();
-        products_request.getAll().then((a) => {
-            console.log(a)
+        this.novoProdutoModal = new Modal(novoProdutoModalForm);
+    }
 
+    dynamicElmnts() {
+
+    }
+
+    addEvents() {
+        let newProductButton = document.querySelector(".new-product-button")
+
+        newProductButton.addEventListener( "click", () => {
+                this.novoProdutoModal.show();
+            }
+        )
+
+        this.novoProdutoModal.modalForm.addEventListener("submit", () => {
+            let response = this.novoProdutoModal.confirm();
+
+            console.log(response)
         });
     }
-)
+}
 
-novoProdutoModal.modalForm.addEventListener("submit", () => {
-    let response = novoProdutoModal.confirm();
-
-    console.log(response)
-});
+const index_ = new index();
