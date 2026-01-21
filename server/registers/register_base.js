@@ -2,7 +2,7 @@ const debug = require('../utilities/debug');
 
 class RegisterBase {
 
-    constructor(connection, createTableQuery, tableName, tableIdField){
+    constructor(connection, createTableQuery, tableName, tableIdField, relationships = {}){
         if(connection == null) {
             debug.logError("Connection can't be null!");
             throw new Error("RegisterBase Error: Connection can't be null!");
@@ -16,6 +16,7 @@ class RegisterBase {
         this.createTableQuery = createTableQuery;
         this.tableIdField = tableIdField;
         this.tableName = tableName;
+        this.relationships = relationships;
 
     }
 
@@ -42,7 +43,15 @@ class RegisterBase {
     }
 
     async getAll() {
-        const sql = `SELECT * FROM ${this.tableName};`;
+        let sql = `SELECT * FROM ${this.tableName} `;
+
+        Object.keys(this.relationships).forEach(tableName => {
+            sql += `INNER JOIN ${tableName} ON
+                    ${tableName}.${this.relationships[tableName]} =
+                    ${this.tableName}.${this.relationships[tableName]} `;
+        });
+        sql += ";";
+
         try {
             const response = await this.querySQL(sql, `Fetched all ${this.tableName}`);
             return response;
