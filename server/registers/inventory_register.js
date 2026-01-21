@@ -18,8 +18,11 @@ class inventoryRegister extends registers_base {
                 FOREIGN KEY (product_id) REFERENCES products(product_id)
             );
         `;
+        const relationships = {
+            "products": "product_id"
+        }
 
-        super(connection, createTableQuery, tableName, tableIdField);
+        super(connection, createTableQuery, tableName, tableIdField, relationships);
     }
 
 }

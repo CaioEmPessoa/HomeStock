@@ -19,8 +19,11 @@ class productRegister extends registers_base {
                 FOREIGN KEY (category_id) REFERENCES categories(category_id)
             );
         `;
+        const relationships = {
+            "categories": "category_id"
+        }
 
-        super(connection, createTableQuery, tableName, tableIdField);
+        super(connection, createTableQuery, tableName, tableIdField, relationships);
     }
 
 }
