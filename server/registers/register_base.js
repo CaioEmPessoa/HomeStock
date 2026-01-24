@@ -65,7 +65,7 @@ class RegisterBase {
         const sql = `SELECT * FROM ${this.tableName} WHERE ${this.tableIdField} = ${id}`;
         try {
             const response = await this.querySQL(sql, `Fetched all ${this.tableName}`);
-            return response;
+            return response[0];
         } catch (error) {
             debug.logError(`Error fetching ${this.tableName}: ${error}`);
             throw error;
