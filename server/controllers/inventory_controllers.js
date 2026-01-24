@@ -65,6 +65,26 @@ class inventoryController extends controllers_base {
 
     });
 
+    this.app.get(`${this.apiUrl}/:id/addStock`, async (req, res) => {
+      try {
+        const result = await this.service.addOneStock(req.params.id);
+        res.json(result);
+      } catch (error) {
+        res.status(500).json(error);
+      }
+
+    });
+
+    this.app.get(`${this.apiUrl}/:id/removeStock`, async (req, res) => {
+      try {
+        const result = await this.service.removeOneStock(req.params.id);
+        res.json(result);
+      } catch (error) {
+        res.status(500).json(error);
+      }
+
+    });
+
   }
 
 }
