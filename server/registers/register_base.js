@@ -21,19 +21,19 @@ class RegisterBase {
     }
 
     querySQL(query, success_msg) {
-        return new Promise((resolve, reject) => {
-            this.connection.query(query, {}, (error, response) => {
-                if(error) {
-                    debug.logError("DATABASE QUERY ERROR: " + error);
-                    debug.logError("QUERY: " + query);
-                    reject(error);
-                }
-                else {
+        return new Promise(async (resolve, reject) => {
+                try {
+                    const [results, fields] = await this.connection.query(query, {});
                     debug.log(success_msg);
-                    resolve(response);
+                    resolve(results);
                 }
-            });
-        });
+                catch (e) {
+                    debug.logError("DATABASE QUERY ERROR: " + e);
+                    debug.logError("QUERY: " + query);
+                    reject(e);
+                }
+            }
+        );
     }
 
     createTable() {
