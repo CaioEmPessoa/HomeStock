@@ -3,14 +3,18 @@ import Modal from "../utils/modal.js";
 import FormQuestions from "../utils/formQuestion.js";
 
 import productsRequest from "../requests/productsRequest.js";
+import inventoriesRequest from "../requests/inventoriesRequest.js";
 
 class index {
     constructor() {
         this.products_request = new productsRequest();
+        this.inventories_request = new inventoriesRequest();
 
         this.staticElmnts();
-        this.dynamicElmnts();
-        this.addEvents();
+
+        this.dynamicElmnts().then(() => {
+            this.addEvents();
+        });
 
     }
 
@@ -28,20 +32,19 @@ class index {
         this.novoProdutoModal = new Modal(novoProdutoModalForm);
     }
 
-    dynamicElmnts() {
+    async dynamicElmnts() {
         const productsCompactList = document.querySelector(".products-compact-list");
         productsCompactList.innerHTML = "";
 
-        this.products_request.getAll().then((productsData) => {
-            productsData.body.forEach(product => {
-                console.log(product);
+        const inventoryData = await this.inventories_request.getAll();
+            inventoryData.body.forEach(inventory => {
 
             let item = `
-                    <div class="product-compact-list-item">
+                    <div class="product-compact-list-item" data-inventory-id=${inventory.inventory_id}>
 
                         <div class="compact-item-info">
                             <img class="compact-item-icon" src="https://placehold.co/125x125" alt="#">
-                            <p class="compact-item-name">${product.product_name}</p>
+                            <p class="compact-item-name">${inventory.product_name}</p>
                         </div>
 
                         <div class="compact-item-stock">
@@ -56,7 +59,7 @@ class index {
                                         </g>
                                     </svg>
                             </button>
-                            <input class="compact-item-stock-edit"></input>
+                            <input class="compact-item-stock-edit" id=inventory-ammnt-${inventory.inventory_id} value=${inventory.inventory_quantity}></input>
                             <button class="compact-item-stock-increase">
                                 <svg class="compact-item-stock-increase-icon" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
@@ -71,7 +74,7 @@ class index {
                         <div class="compact-item-data">
                             <div class="compact-item-data-item">
                                 <div class="compact-item-data-title">Cod de Barras:</div>
-                                <div class="compact-item-data-data">${product.product_barcode}</div>
+                                <div class="compact-item-data-data" >${inventory.product_barcode}</div>
                             </div>
                         </div>
 
@@ -87,9 +90,28 @@ class index {
 
             productsCompactList.innerHTML += item
             });
-        })
 
 
+    }
+
+    addStock(id) {
+        const stockInput = document.getElementById(`inventory-ammnt-${id}`);
+        
+        this.inventories_request.addOneStock(id).then((response) => {
+            console.log(response);
+
+            stockInput.value = response.body.inventory_quantity;
+        });
+    }
+    
+    removeStock(id) {
+        const stockInput = document.getElementById(`inventory-ammnt-${id}`);
+        
+        this.inventories_request.removeOneStock(id).then((response) => {
+            console.log(response);
+
+            stockInput.value = response.body.inventory_quantity;
+        });
     }
 
     addEvents() {
@@ -99,6 +121,22 @@ class index {
                 this.novoProdutoModal.show();
             }
         )
+
+        const productCompactListItens = document.querySelectorAll(".product-compact-list-item");
+        
+        productCompactListItens.forEach((item) => {
+            item.addEventListener("click", (event) => {
+                // increase events
+                if (event.target.closest(".compact-item-stock-increase")) {
+                    this.addStock(item.dataset.inventoryId);
+                }
+                
+                // remove events
+                if (event.target.closest(".compact-item-stock-remove")) {
+                    this.removeStock(item.dataset.inventoryId);
+                }
+            });
+        })
 
         this.novoProdutoModal.modalForm.addEventListener("submit", () => {
             let response = this.novoProdutoModal.confirm();
