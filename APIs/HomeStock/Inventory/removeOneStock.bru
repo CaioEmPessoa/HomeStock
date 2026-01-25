@@ -1,11 +1,11 @@
 meta {
-  name: GetById
+  name: removeOneStock
   type: http
-  seq: 1
+  seq: 7
 }
 
 get {
-  url: http://localhost:2469/api/category/:id
+  url: http://localhost:2469/api/inventory/:id/removeStock
   body: none
   auth: inherit
 }
