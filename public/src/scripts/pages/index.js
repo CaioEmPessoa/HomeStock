@@ -19,17 +19,26 @@ class index {
     }
 
     staticElmnts() {
+        // TODO: the specified input types commented out
         const novoProdutoModalForm = [
-            new FormQuestions("Qual seu nome?").text("nome"),
-            new FormQuestions("E sobrenome?").text("sobrenome"),
-            new FormQuestions("Qual seu favorito?").select([
-                "bolo",
-                "pizza",
-                "agua"
-            ], "comida")
+            new FormQuestions("Qual o produto?").select([
+                "NOME PRODUTO 1 - <codigo barras>",
+                "NOME PRODUTO 2 - <codigo barras>",
+                "NOME PRODUTO 3 - <codigo barras>"
+            ], "produto-select"), // dropdown select
+            new FormQuestions("Qual nome do produto?").text("nome"),
+            new FormQuestions("Qual o código de barras do produto?").text("codigo-barras"),
+            new FormQuestions("Url para imagem do produto").text("imagem"), // url/imgae
+            new FormQuestions("Emoji representando o produto?").text("emoji-icon"),
+            new FormQuestions("Mínimo deste produto").text("minimo"), // number
+            new FormQuestions("Máximo deste produto").text("maximo"), // mumber
+            
+            new FormQuestions("Quantos você tem?").text("quantidade"), // mumber
+            new FormQuestions("Qual a data de validade deles?").text("validade"), // date
+            new FormQuestions("E a data de fabricação?").text("fabricacao"), // date
         ]
 
-        this.novoProdutoModal = new Modal(novoProdutoModalForm);
+        this.novoProdutoModal = new Modal(novoProdutoModalForm, "Novo produto!");
     }
 
     async dynamicElmnts() {
