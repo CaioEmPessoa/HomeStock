@@ -25,16 +25,16 @@ class registersIndex {
             // --------- START CREATING TABLES --------
             debug.log("Start creating tables...");
             this.registers.category_register = new categoryRegister(this.connection);
-            this.registers.category_register.createTable();
+            await this.registers.category_register.createTable();
 
             this.registers.roles_register = new rolesRegister(this.connection);
-            this.registers.roles_register.createTable();
+            await this.registers.roles_register.createTable();
 
             this.registers.products_register = new productsRegister(this.connection);
-            this.registers.products_register.createTable();
+            await this.registers.products_register.createTable();
 
             this.registers.inventory_register = new inventoryRegister(this.connection);
-            this.registers.inventory_register.createTable();
+            await this.registers.inventory_register.createTable();
 
             debug.log("Finished creating tables!");
 

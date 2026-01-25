@@ -36,10 +36,9 @@ class RegisterBase {
         );
     }
 
-    createTable() {
+    async createTable() {
         debug.log(`Creating ${this.tableName} table...`)
-
-        this.querySQL(this.createTableQuery, `Created ${this.tableName} table.`);
+        return await this.querySQL(this.createTableQuery, `Created ${this.tableName} table.`);
     }
 
     async getAll() {
