@@ -5,8 +5,9 @@ class Modal {
      *
      * @param {[formQuestion]} questions - A list of form questions
      */
-    constructor (questions) {
+    constructor (questions, title) {
         this.questions = questions;
+        this.title = title;
         this.modal = this.createModal();
 
         this.modalForm = this.modal.querySelector("form");
@@ -26,7 +27,7 @@ class Modal {
 
         const modalTitle = document.createElement('h3');
         modalTitle.className = 'modal-title';
-        modalTitle.textContent = 'Teste!';
+        modalTitle.textContent = this.title;
 
         const modalCloseBtn = document.createElement('button');
         modalCloseBtn.className = 'modal-close';
