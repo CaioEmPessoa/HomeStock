@@ -1,28 +1,55 @@
 
 class FormQuestion {
 
-    constructor (title) {
-        this.title = title;
+    constructor (title, customClass) {
+        this.title = title || "";
+        this.customClass = customClass || "";
     }
-
-    text(name="") {
-
+    
+    _genModalFormQuestion() {
         let modalFormQuestion = document.createElement('div');
-        modalFormQuestion.classList.add("modal-form-question");
+        // Always adds the class "modal-form-question"
+        // If user passed a new custom class, adds it too.
+        modalFormQuestion.classList.add(
+            ...["modal-form-question", this.customClass].filter(Boolean)
+        );
 
         let modalQuestionTitle = document.createElement('p');
         modalQuestionTitle.classList.add("modal-question-title");
         modalQuestionTitle.innerText = this.title;
 
+        modalFormQuestion.append(modalQuestionTitle);
+
+        return modalFormQuestion;
+    }
+
+    generic(inputType="", name="") {
+
+        let modalFormQuestion = this._genModalFormQuestion();
+
         let modalQuestionInput = document.createElement('input');
         modalQuestionInput.classList.add("modal-question-input")
-        modalQuestionInput.type = "text";
+        modalQuestionInput.type = inputType;
         modalQuestionInput.name = name;
 
-        modalFormQuestion.append(modalQuestionTitle);
         modalFormQuestion.append(modalQuestionInput);
 
-        document.querySelector("body").append(modalFormQuestion)
+        return modalFormQuestion;
+    }
+
+    text(name="") {
+        return this.generic("text", name);
+    }
+    date(name="") {
+        return this.generic("date", name);
+    }
+    number(name="", min, max) {
+        let modalFormQuestion = this.generic("number", name);
+
+        let modalQuestionInput = modalFormQuestion.querySelector(".modal-question-input")
+        modalQuestionInput.min = min;
+        modalQuestionInput.max = max;
+        modalQuestionInput.name = name;
 
         return modalFormQuestion;
     }
@@ -32,14 +59,7 @@ class FormQuestion {
     }
 
     select(options = [], name="") {
-        let modalFormQuestion = document.createElement('div');
-        modalFormQuestion.classList.add("modal-form-question");
-
-        let modalQuestionTitle = document.createElement('p');
-        modalQuestionTitle.classList.add("modal-question-title");
-        modalQuestionTitle.innerText = this.title;
-
-        modalFormQuestion.append(modalQuestionTitle);
+        let modalFormQuestion = this._genModalFormQuestion();
 
         options.forEach((el) => {
 
@@ -66,12 +86,100 @@ class FormQuestion {
 
     }
 
-    date() {
-        /* TODO */
+    dropdown(options = [], name="", defaultOption="") {
+        let modalFormQuestion = this._genModalFormQuestion();
+
+        let modalQuestionSelectDropdown = document.createElement("select");
+        modalQuestionSelectDropdown.classList.add("modal-question-input");
+        modalQuestionSelectDropdown.name = name;
+
+        if (defaultOption) options.unshift({name:defaultOption, value:null});
+        options.forEach((el) => {
+            let modalQuestionSelectDropdownOption = document.createElement('option');
+            modalQuestionSelectDropdownOption.value = el.value;
+            modalQuestionSelectDropdownOption.innerText = el.name;
+
+            modalQuestionSelectDropdown.append(modalQuestionSelectDropdownOption);
+        })
+
+        modalFormQuestion.append(modalQuestionSelectDropdown);
+
+        return modalFormQuestion;
     }
 
-    toggle() {
-        /* TODO */
+    toggle(label="", name="") {
+        let modalFormQuestion = this._genModalFormQuestion();
+
+        // Toggle elmnts
+        let modalToggleDiv = document.createElement("div");
+        modalToggleDiv.classList.add("modal-form-toggle-div");
+
+        let modalToggle = document.createElement("label");
+        modalToggle.classList.add("modal-form-toggle");
+
+        let modalToggleInput = document.createElement("input");
+        modalToggleInput.type = "checkbox";
+        modalToggleInput.name = name;
+        
+        let modalToggleSpan = document.createElement("span");
+        modalToggleSpan.classList.add("modal-form-toggle-slider");
+
+        let modalToggleLabel = document.createElement("p");
+        modalToggleLabel.innerText = label;
+
+        // Appends
+        modalToggle.append(modalToggleInput);
+        modalToggle.append(modalToggleSpan);
+
+        modalToggleDiv.append(modalToggle);
+        modalToggleDiv.append(modalToggleLabel);
+
+        modalFormQuestion.append(modalToggleDiv);
+
+        return modalFormQuestion;
+    }
+
+    // Other components
+    spacer(showHr=true) {
+        let modalFormQuestion = document.createElement('div');
+        modalFormQuestion.classList.add("modal-form-question");
+
+        
+        let modalQuestionTitle = document.createElement('h3');
+        modalQuestionTitle.innerText = this.title;
+
+        if (showHr) {
+            let modalQuestionDiv = document.createElement('hr');
+            modalFormQuestion.append(modalQuestionDiv);
+        }
+
+        modalFormQuestion.append(modalQuestionTitle)
+
+        return modalFormQuestion;
+    }
+
+    // Display a list of other components
+    // next to each other on the same row.
+    double(components=[]) {
+        let modalFormQuestion = document.createElement('div');
+        modalFormQuestion.classList.add("modal-form-question");
+
+        let modalQuestionTitle = document.createElement('p');
+        modalQuestionTitle.classList.add("modal-question-title");
+        modalQuestionTitle.innerText = this.title;
+
+        let doubleRow = document.createElement("div");
+        doubleRow.classList.add("modal-form-double-row");
+
+        components.forEach(el => {
+            doubleRow.append(el);
+        });
+
+        modalFormQuestion.append(modalQuestionTitle);
+        modalFormQuestion.append(doubleRow);
+
+        return modalFormQuestion;
+
     }
 }
 
