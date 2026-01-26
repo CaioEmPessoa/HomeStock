@@ -21,21 +21,27 @@ class index {
     staticElmnts() {
         // TODO: the specified input types commented out
         const novoProdutoModalForm = [
-            new FormQuestions("Qual o produto?").select([
-                "NOME PRODUTO 1 - <codigo barras>",
-                "NOME PRODUTO 2 - <codigo barras>",
-                "NOME PRODUTO 3 - <codigo barras>"
-            ], "produto-select"), // dropdown select
-            new FormQuestions("Qual nome do produto?").text("nome"),
-            new FormQuestions("Qual o código de barras do produto?").text("codigo-barras"),
-            new FormQuestions("Url para imagem do produto").text("imagem"), // url/imgae
-            new FormQuestions("Emoji representando o produto?").text("emoji-icon"),
-            new FormQuestions("Mínimo deste produto").text("minimo"), // number
-            new FormQuestions("Máximo deste produto").text("maximo"), // mumber
+            new FormQuestions("Selecione um Produto ou crie um novo").double([
+                new FormQuestions("", "produto-select").dropdown([
+                    {name: "NOME PRODUTO 1 - <codigo barras>", value: 0},
+                    {name: "NOME PRODUTO 2 - <codigo barras>", value: 1},
+                    {name: "NOME PRODUTO 3 - <codigo barras>", value: 2},
+                ], "produto-select", "Selecione..."),
+
+                new FormQuestions().toggle("novo", "novo-produto-toggle")
+            ]),
             
-            new FormQuestions("Quantos você tem?").text("quantidade"), // mumber
-            new FormQuestions("Qual a data de validade deles?").text("validade"), // date
-            new FormQuestions("E a data de fabricação?").text("fabricacao"), // date
+            new FormQuestions("Nome do produto", "new-product-input").text("nome"),
+            new FormQuestions("Código de barras do produto", "new-product-input").text("codigo-barras"),
+            new FormQuestions("Url ou imagem do produto", "new-product-input").text("imagem"), // url/imgae
+            new FormQuestions("Mínimo deste produto", "new-product-input").number("minimo", 0),
+            new FormQuestions("Máximo deste produto", "new-product-input").number("maximo", 0),
+
+            new FormQuestions("Inventário").spacer(false),
+            
+            new FormQuestions("Quantos você tem?").number("quantidade", 0, 100),
+            new FormQuestions("Qual a data de validade deles?").date("validade"), 
+            new FormQuestions("E a data de fabricação?").date("fabricacao"),
         ]
 
         this.novoProdutoModal = new Modal(novoProdutoModalForm, "Novo produto!");
@@ -145,6 +151,17 @@ class index {
                     this.removeStock(item.dataset.inventoryId);
                 }
             });
+        });
+
+        let novoProdutoToggle = this.novoProdutoModal.modalForm.querySelector("input[name=novo-produto-toggle]");
+        novoProdutoToggle.addEventListener("click", (toggleInput) => {
+            const productInfos = this.novoProdutoModal.modalForm.querySelectorAll(".new-product-input");
+            productInfos.forEach((productInput) => {
+                productInput.style.display = toggleInput.target.checked ? "revert" : "none";
+            });
+
+            const productSelect = this.novoProdutoModal.modalForm.querySelector(".produto-select select");
+            productSelect.disabled = toggleInput.target.checked;
         })
 
         this.novoProdutoModal.modalForm.addEventListener("submit", () => {

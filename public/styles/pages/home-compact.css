@@ -78,6 +78,10 @@
 
 /* ----- END SERACH BAR ----- */
 
+/* Elements on new prodct modal */
+.new-product-input {
+    display: none;
+}
 
 .new-produtct .new-product-button { 
     padding: 8px 17px;
