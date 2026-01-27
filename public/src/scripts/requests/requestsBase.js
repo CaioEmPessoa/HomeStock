@@ -17,9 +17,16 @@ class requestsBase {
     }
 
     async post(path, body) {
-        const response = await fetch(`${this.url}${path}`, {
+        const reqBody = JSON.stringify(body, (k, v) => v == "" ? null : v);
+        const url = `${this.url}${path}`;
+
+        console.log("saaa")
+        console.log(url);
+        console.log(reqBody);
+
+        const response = await fetch(url, {
             method: "POST",
-            body: JSON.stringify(body),
+            body: reqBody,
             headers: {
                 "Content-Type": "application/json",
             },

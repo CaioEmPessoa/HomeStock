@@ -77,8 +77,12 @@ class RegisterBase {
     **/
     async save(entity) {
         debug.log(`Saving into ${this.tableName}...`);
-        let sql  = `INSERT INTO ${this.tableName} ( ${Object.keys(entity)} ) `;
-            sql += `VALUES ( '${Object.values(entity).join("', '")}' );`;
+
+        let columns = Object.keys(entity);
+        let values = `'${Object.values(entity).join("', '")}'`.replaceAll("''", null);
+
+        let sql  = `INSERT INTO ${this.tableName} ( ${columns} ) `;
+            sql += `VALUES ( ${values} );`;
 
         try {
             const response = await this.querySQL(sql, `Saved into ${this.tableName}!`);

@@ -131,7 +131,7 @@ class FormQuestion {
         modalQuestionSelectDropdown.classList.add("modal-question-input");
         modalQuestionSelectDropdown.name = name;
 
-        if (defaultOption) options.unshift({name:defaultOption, value:null});
+        if (defaultOption) options.unshift({name:defaultOption, value:""});
         options.forEach((el) => {
             let modalQuestionSelectDropdownOption = document.createElement('option');
             modalQuestionSelectDropdownOption.value = el.value;
