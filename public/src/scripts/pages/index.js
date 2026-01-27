@@ -36,7 +36,7 @@ class index {
                     productsOptions, "product_id", "Selecione..."
                 ),
 
-                new FormQuestions().toggle("novo", "new-product-toggle")
+                new FormQuestions().toggle("novo", "new_product_toggle")
             ]),
 
             new FormQuestions("Nome do produto", "new-product-input").text("product_name"),
@@ -132,6 +132,35 @@ class index {
         });
     }
 
+    async newItem(modalValues) {
+
+        let newInventoryObj = {
+            "inventory_quantity": modalValues.inventory_quantity,
+            "inventory_expiry_date": modalValues.inventory_expiry_date,
+            "inventory_manufacturing_date": modalValues.inventory_manufacturing_date,
+            "product_id": modalValues.product_id
+        }
+
+        if(modalValues.new_product_toggle) {
+            let newProductObj = {
+                "product_name": modalValues.product_name,
+                "product_barcode": modalValues.product_barcode,
+                "product_image": modalValues.product_image,
+                "product_icon": modalValues.product_icon,
+                "product_minimum": modalValues.product_minimum,
+                "product_maximum": modalValues.product_maximum
+            }
+
+            const product_response = await this.products_request.new(newProductObj);
+
+            newInventoryObj.product_id = product_response.body.product_id;
+        }
+
+        const inventory_response = await this.inventories_request.new(newInventoryObj)
+
+        this.refreshPage();
+    }
+
     addEvents() {
         let newProductButton = document.querySelector(".new-product-button")
 
@@ -156,7 +185,12 @@ class index {
             });
         });
 
-        let novoProdutoToggle = this.novoProdutoModal.modalForm.querySelector("input[name=new-product-toggle]");
+        this.novoProdutoModal.modalForm.addEventListener("submit", () => {
+            const modalValues = this.novoProdutoModal.confirm();
+            this.newItem(modalValues);
+        });
+
+        let novoProdutoToggle = this.novoProdutoModal.modalForm.querySelector("input[name=new_product_toggle]");
         novoProdutoToggle.addEventListener("click", (toggleInput) => {
             const productInfos = this.novoProdutoModal.modalForm.querySelectorAll(".new-product-input");
             productInfos.forEach((productInput) => {
@@ -167,22 +201,6 @@ class index {
             productSelect.disabled = toggleInput.target.checked;
         })
 
-        this.novoProdutoModal.modalForm.addEventListener("submit", () => {
-            const modalValues = this.novoProdutoModal.confirm();
-
-            const newInventoryObj = {
-                "inventory_quantity": modalValues.inventory_quantity,
-                "inventory_expiry_date": modalValues.inventory_expiry_date,
-                "inventory_manufacturing_date": modalValues.inventory_manufacturing_date,
-                "product_id": modalValues.product_id
-            }
-
-            this.inventories_request.new(newInventoryObj).then((response) => {
-                console.log(response);
-                this.refreshPage();
-            });
-
-        });
     }
 
     refreshPage() {
