@@ -17,9 +17,18 @@ class inventoriesRequest extends requestBase {
         });
     }
 
+    new(obj) {
+        return new Promise((resolve, reject) => {
+            this.post("new", obj).then((response) => {
+                let body = response.json()
+                resolve(body)
+            });
+        });
+    }
+
     addOneStock(id) {
         return new Promise((resolve, reject) => {
-            this.get(`${id}/addStock`).then((response) => {
+            this.post(`${id}/addStock`).then((response) => {
                 let body = response.json()
                 resolve(body)
             });
@@ -28,7 +37,7 @@ class inventoriesRequest extends requestBase {
 
     removeOneStock(id) {
         return new Promise((resolve, reject) => {
-            this.get(`${id}/removeStock`).then((response) => {
+            this.post(`${id}/removeStock`).then((response) => {
                 let body = response.json()
                 resolve(body)
             });

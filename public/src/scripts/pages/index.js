@@ -10,12 +10,7 @@ class index {
         this.products_request = new productsRequest();
         this.inventories_request = new inventoriesRequest();
 
-        this.staticElmnts();
-
-        this.dynamicElmnts().then(() => {
-            this.addEvents();
-        });
-
+        this.refreshPage();
     }
 
     staticElmnts() {
@@ -38,7 +33,7 @@ class index {
         const novoProdutoModalForm = [
             new FormQuestions("Selecione um Produto ou crie um novo").double([
                 new FormQuestions("", "produto-select").dropdown(
-                    productsOptions, "produto_id", "Selecione..."
+                    productsOptions, "product_id", "Selecione..."
                 ),
 
                 new FormQuestions().toggle("novo", "new-product-toggle")
@@ -125,8 +120,6 @@ class index {
         const stockInput = document.getElementById(`inventory-ammnt-${id}`);
 
         this.inventories_request.addOneStock(id).then((response) => {
-            console.log(response);
-
             stockInput.value = response.body.inventory_quantity;
         });
     }
@@ -135,8 +128,6 @@ class index {
         const stockInput = document.getElementById(`inventory-ammnt-${id}`);
 
         this.inventories_request.removeOneStock(id).then((response) => {
-            console.log(response);
-
             stockInput.value = response.body.inventory_quantity;
         });
     }
@@ -165,7 +156,7 @@ class index {
             });
         });
 
-        let novoProdutoToggle = this.novoProdutoModal.modalForm.querySelector("input[name=novo-produto-toggle]");
+        let novoProdutoToggle = this.novoProdutoModal.modalForm.querySelector("input[name=new-product-toggle]");
         novoProdutoToggle.addEventListener("click", (toggleInput) => {
             const productInfos = this.novoProdutoModal.modalForm.querySelectorAll(".new-product-input");
             productInfos.forEach((productInput) => {
@@ -177,9 +168,28 @@ class index {
         })
 
         this.novoProdutoModal.modalForm.addEventListener("submit", () => {
-            let response = this.novoProdutoModal.confirm();
+            const modalValues = this.novoProdutoModal.confirm();
 
-            console.log(response)
+            const newInventoryObj = {
+                "inventory_quantity": modalValues.inventory_quantity,
+                "inventory_expiry_date": modalValues.inventory_expiry_date,
+                "inventory_manufacturing_date": modalValues.inventory_manufacturing_date,
+                "product_id": modalValues.product_id
+            }
+
+            this.inventories_request.new(newInventoryObj).then((response) => {
+                console.log(response);
+                this.refreshPage();
+            });
+
+        });
+    }
+
+    refreshPage() {
+        this.staticElmnts();
+
+        this.dynamicElmnts().then(() => {
+            this.addEvents();
         });
     }
 
