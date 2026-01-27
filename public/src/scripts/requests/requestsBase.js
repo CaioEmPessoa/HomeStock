@@ -20,10 +20,6 @@ class requestsBase {
         const reqBody = JSON.stringify(body, (k, v) => v == "" ? null : v);
         const url = `${this.url}${path}`;
 
-        console.log("saaa")
-        console.log(url);
-        console.log(reqBody);
-
         const response = await fetch(url, {
             method: "POST",
             body: reqBody,
