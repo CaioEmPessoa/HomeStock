@@ -45,7 +45,7 @@ class RegisterBase {
         let sql = `SELECT * FROM ${this.tableName} `;
 
         Object.keys(this.relationships).forEach(tableName => {
-            sql += `INNER JOIN ${tableName} ON
+            sql += `LEFT JOIN ${tableName} ON
                     ${tableName}.${this.relationships[tableName]} =
                     ${this.tableName}.${this.relationships[tableName]} `;
         });
