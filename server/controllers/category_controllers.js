@@ -17,7 +17,7 @@ class categoryController extends controllers_base {
       res.json(result);
     });
 
-    this.app.get(`${this.apiUrl}/new`, async (req, res) => {
+    this.app.post(`${this.apiUrl}/new`, async (req, res) => {
       const schema = Joi.object().required();
 
       if ( this.validateJoi(schema, res, req) ) return;
@@ -41,7 +41,7 @@ class categoryController extends controllers_base {
 
     });
 
-    this.app.get(`${this.apiUrl}/:id/update`, async (req, res) => {
+    this.app.post(`${this.apiUrl}/:id/update`, async (req, res) => {
       const schema = Joi.object().required();
 
       if ( this.validateJoi(schema, res, req) ) return;
@@ -55,7 +55,7 @@ class categoryController extends controllers_base {
 
     });
 
-    this.app.get(`${this.apiUrl}/:id/delete`, async (req, res) => {
+    this.app.post(`${this.apiUrl}/:id/delete`, async (req, res) => {
       try {
         const result = await this.service.delete(req.params.id);
         res.json(result);
