@@ -81,7 +81,7 @@ class Modal {
         cancelBtn.addEventListener('click', () => this.close(true));
 
         // Close when clicking outside modal
-        this.modal.addEventListener('click', (e) => {
+        this.modal.addEventListener('mousedown', (e) => {
             if (e.target === this.modal) {
                 this.close();
             }
