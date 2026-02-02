@@ -4,10 +4,15 @@ class Modal {
     /**
      *
      * @param {[formQuestion]} questions - A list of form questions
+     * @param {string} title - The modal's title
+     * @param {string} submitText - Text that should appear as the "submit" button
+     * @param {string} cancelText - Text that should appear as the "cancel" button
      */
-    constructor (questions, title) {
+    constructor (questions, title, submitText, cancelText) {
         this.questions = questions;
         this.title = title;
+        this.submitText = submitText ?? "Submit";
+        this.cancelText = cancelText ?? "Cancel";
         this.modal = this.createModal();
 
         this.modalForm = this.modal.querySelector("form");
@@ -50,12 +55,12 @@ class Modal {
 
         this.cancelBtn = document.createElement('button');
         this.cancelBtn.className = 'modal-cancel';
-        this.cancelBtn.textContent = 'cancelar';
+        this.cancelBtn.textContent = this.cancelText;
 
         this.confirmBtn = document.createElement('input');
         this.confirmBtn.className = 'modal-confirm';
         this.confirmBtn.type = 'submit';
-        this.confirmBtn.textContent = 'confirmar';
+        this.confirmBtn.value = this.submitText;
 
         modalButtons.appendChild(this.cancelBtn);
         modalButtons.appendChild(this.confirmBtn);
