@@ -8,7 +8,7 @@ class PopUpMenu {
      */
     constructor (options, position) {
         this.options = options;
-        this.position = position ? position : "left";
+        this.position = position ?? "left";
 
         this.popUpMenu = this.createPopUpMenu();
 
@@ -24,6 +24,7 @@ class PopUpMenu {
         this.options.forEach(optn => {
             const optionEl = document.createElement("button");
             optionEl.classList.add("popUpMenuButton");
+            optionEl.dataset.name = optn;
             optionEl.innerText = optn;
 
             popUpMenu.append(optionEl);
@@ -81,16 +82,6 @@ class PopUpMenu {
         this.target = undefined;
     }
 
-    confirm () {
-        // const formData = new FormData(this.modalForm);
-
-        // const formObject = Object.fromEntries(formData.entries());
-
-        // this.reset();
-        // this.close();
-
-        // return formObject;
-    }
 }
 
 export default PopUpMenu;

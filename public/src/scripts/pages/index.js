@@ -1,6 +1,7 @@
 
 import Modal from "../utils/modal.js";
 import FormQuestions from "../utils/formQuestion.js";
+import PopUpMenu from "../utils/popUpMenu.js";
 
 import productsRequest from "../requests/productsRequest.js";
 import inventoriesRequest from "../requests/inventoriesRequest.js";
@@ -30,6 +31,8 @@ class index {
             });
         });
 
+        this.popUpActionMenu = new PopUpMenu(["Apagar", "Editar"]);
+
         const novoProdutoModalForm = [
             new FormQuestions("Selecione um Produto ou crie um novo").double([
                 new FormQuestions("", "produto-select").dropdown(
@@ -51,8 +54,12 @@ class index {
             new FormQuestions("Qual a data de validade deles?").date("inventory_expiry_date"),
             new FormQuestions("E a data de fabricação?").date("inventory_manufacturing_date"),
         ]
+        this.novoProdutoModal = new Modal(novoProdutoModalForm, "Novo produto!", "Confirmar", "Cancelar");
 
-        this.novoProdutoModal = new Modal(novoProdutoModalForm, "Novo produto!");
+        const deletarProdutoModalForm = [
+            new FormQuestions("Tem certeza que deseja apagar este item do inventário?").spacer(false)
+        ]
+        this.deletarProdutoModal = new Modal(deletarProdutoModalForm, "Confirme a sua ação", "Confirmar", "Cancelar");
 
         // Main list
         const productsCompactList = document.querySelector(".products-compact-list");
@@ -102,7 +109,7 @@ class index {
 
                     <div class="compact-item-actions">
                         <button class="compact-item-actions-more">
-                            <svg viewBox="0 0 16 16" class="compact-item-actions-more">
+                            <svg viewBox="0 0 16 16">
                                 <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                             </svg>
                         </button>
@@ -164,10 +171,26 @@ class index {
     addEvents() {
         let newProductButton = document.querySelector(".new-product-button")
 
-        newProductButton.addEventListener( "click", () => {
+        newProductButton.addEventListener( "click", (e) => {
                 this.novoProdutoModal.show();
             }
         )
+
+        let listItensActionsButton = document.querySelectorAll(".compact-item-actions-more");
+        listItensActionsButton.forEach((itemActionButtom) => {
+            itemActionButtom.addEventListener("click", (e) => {
+                this.popUpActionMenu.show(e.target.closest(".compact-item-actions"));
+            })
+        })
+
+        this.popUpActionMenu.popUpMenu.addEventListener("click", (e) => {
+            const acao = e.target.closest(".popUpMenuButton").dataset.name;
+
+            if(acao == "Apagar") {
+                this.deletarProdutoModal.show()
+            }
+
+        })
 
         const productCompactListItens = document.querySelectorAll(".product-compact-list-item");
 
