@@ -1,0 +1,87 @@
+
+.popUpMenu {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    color: black;
+
+    min-width: 100px;
+    width: min-content;
+    position: absolute;
+}
+
+.popUpMenuButton {
+    padding: 5px;
+    width: 100%;
+}
+
+.popUpMenuButton:hover {
+    background-color: var(--secondary);
+    color: var(--text-alt);
+    cursor: pointer;
+}
+
+.popUpMenu.popupmenu-slide-left.popupmenu-shown {
+    animation: slideDown 300ms ease-in-out;
+}
+
+.popUpMenu.popupmenu-hidden {
+    visibility: hidden;
+}
+
+@keyframes slide-left {
+  0% {
+    transition: 2s;
+    display: block;
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  100% {
+    transition: 2s;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slide-right {
+  0% {
+    transition: 2s;
+    display: block;
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  100% {
+    transition: 2s;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slide-top {
+  0% {
+    transition: 2s;
+    display: block;
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  100% {
+    transition: 2s;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slide-bottom {
+  0% {
+    transition: 2s;
+    display: block;
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+
+  100% {
+    transition: 2s;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
