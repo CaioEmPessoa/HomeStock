@@ -26,6 +26,15 @@ class inventoriesRequest extends requestBase {
         });
     }
 
+    delete(id) {
+        return new Promise((resolve, reject) => {
+            this.post(`${id}/delete`).then((response) => {
+                let body = response.json()
+                resolve(body)
+            });
+        });
+    }
+
     addOneStock(id) {
         return new Promise((resolve, reject) => {
             this.post(`${id}/addStock`).then((response) => {

@@ -11,6 +11,8 @@ class index {
         this.products_request = new productsRequest();
         this.inventories_request = new inventoriesRequest();
 
+        this.selectedItem;
+
         this.refreshPage();
     }
 
@@ -180,12 +182,13 @@ class index {
         listItensActionsButton.forEach((itemActionButtom) => {
             itemActionButtom.addEventListener("click", (e) => {
                 this.popUpActionMenu.show(e.target.closest(".compact-item-actions"));
+                this.selectedItem = e.target.closest(".product-compact-list-item").dataset.inventoryId;
             })
         })
 
         this.popUpActionMenu.popUpMenu.addEventListener("click", (e) => {
             const acao = e.target.closest(".popUpMenuButton").dataset.name;
-
+            console.log(this.selectedItem)
             if(acao == "Apagar") {
                 this.deletarProdutoModal.show()
             }
@@ -212,6 +215,12 @@ class index {
             const modalValues = this.novoProdutoModal.confirm();
             this.newItem(modalValues);
         });
+
+        this.deletarProdutoModal.modalForm.addEventListener("submit", () => {
+            this.deletarProdutoModal.confirm();
+            this.inventories_request.delete(this.selectedItem);
+            this.refreshPage();
+        })
 
         let novoProdutoToggle = this.novoProdutoModal.modalForm.querySelector("input[name=new_product_toggle]");
         novoProdutoToggle.addEventListener("click", (toggleInput) => {
