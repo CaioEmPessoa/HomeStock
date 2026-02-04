@@ -11,8 +11,17 @@ class inventoriesRequest extends requestBase {
     getAll() {
         return new Promise((resolve, reject) => {
             this.get("list").then((response) => {
-                let body = response.json()
-                resolve(body)
+                let body = response.json();
+                resolve(body);
+            });
+        });
+    }
+
+    getById(id) {
+        return new Promise((resolve, reject) => {
+            this.get(`${id}/`).then((response) => {
+                let body = response.json();
+                resolve(body);
             });
         });
     }
@@ -20,8 +29,8 @@ class inventoriesRequest extends requestBase {
     new(obj) {
         return new Promise((resolve, reject) => {
             this.post("new", obj).then((response) => {
-                let body = response.json()
-                resolve(body)
+                let body = response.json();
+                resolve(body);
             });
         });
     }
@@ -29,8 +38,8 @@ class inventoriesRequest extends requestBase {
     delete(id) {
         return new Promise((resolve, reject) => {
             this.post(`${id}/delete`).then((response) => {
-                let body = response.json()
-                resolve(body)
+                let body = response.json();
+                resolve(body);
             });
         });
     }
@@ -38,8 +47,8 @@ class inventoriesRequest extends requestBase {
     addOneStock(id) {
         return new Promise((resolve, reject) => {
             this.post(`${id}/addStock`).then((response) => {
-                let body = response.json()
-                resolve(body)
+                let body = response.json();
+                resolve(body);
             });
         });
     }
@@ -47,8 +56,8 @@ class inventoriesRequest extends requestBase {
     removeOneStock(id) {
         return new Promise((resolve, reject) => {
             this.post(`${id}/removeStock`).then((response) => {
-                let body = response.json()
-                resolve(body)
+                let body = response.json();
+                resolve(body);
             });
         });
     }
