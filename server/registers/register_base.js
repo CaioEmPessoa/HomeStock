@@ -61,7 +61,14 @@ class RegisterBase {
     }
 
     async getById(id) {
-        const sql = `SELECT * FROM ${this.tableName} WHERE ${this.tableIdField} = ${id}`;
+        let sql = `SELECT * FROM ${this.tableName} `;
+
+        Object.keys(this.relationships).forEach(tableName => {
+            sql += `LEFT JOIN ${tableName} ON
+                    ${tableName}.${this.relationships[tableName]} =
+                    ${this.tableName}.${this.relationships[tableName]} `;
+        });
+        sql += `WHERE ${this.tableIdField} = ${id};`;
         try {
             const response = await this.querySQL(sql, `Fetched all ${this.tableName}`);
             return response[0];
