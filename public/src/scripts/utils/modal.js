@@ -106,6 +106,17 @@ class Modal {
         this.modalForm.reset()
     }
 
+    setValues(obj) {
+        const formData = new FormData(this.modalForm);
+        const formObject = Object.fromEntries(formData.entries());
+
+        Object.keys(formObject).forEach((formElmnt) => {
+            let el = document.querySelector(`[name="${formElmnt}"]`);
+            el.value = obj[formElmnt];
+        })
+
+    }
+
     close (reset) {
         if(reset === true) this.reset();
         this.modal.classList.add('modal-box-hidden');

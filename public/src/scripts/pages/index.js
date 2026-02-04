@@ -125,6 +125,7 @@ class index {
 
     }
 
+    // Action Functions
     addStock(id) {
         const stockInput = document.getElementById(`inventory-ammnt-${id}`);
 
@@ -139,6 +140,16 @@ class index {
         this.inventories_request.removeOneStock(id).then((response) => {
             stockInput.value = response.body.inventory_quantity;
         });
+    }
+
+    async spawnEditForm(id) {
+        console.log(id)
+        const currentValues = await this.inventories_request.getById(id);
+        const currentValuesObj = {
+            "inventory_quantity": currentValues.body.inventory_quantity
+        }
+        this.novoProdutoModal.setValues(currentValues.body);
+        this.novoProdutoModal.show();
     }
 
     async newItem(modalValues) {
@@ -187,10 +198,13 @@ class index {
         })
 
         this.popUpActionMenu.popUpMenu.addEventListener("click", (e) => {
-            const acao = e.target.closest(".popUpMenuButton").dataset.name;
-            console.log(this.selectedItem)
-            if(acao == "Apagar") {
+            const action = e.target.closest(".popUpMenuButton").dataset.name;
+
+            if(action == "Apagar") {
                 this.deletarProdutoModal.show()
+            }
+            else if(action == "Editar") {
+                this.spawnEditForm(this.selectedItem);
             }
 
         })
