@@ -25,6 +25,15 @@ class productsRequest extends requestBase {
             });
         });
     }
+
+    update(id, obj) {
+        return new Promise((resolve, reject) => {
+            this.post(`${id}/update`, obj).then((response) => {
+                let body = response.json();
+                resolve(body);
+            });
+        });
+    }
 }
 
 export default productsRequest;

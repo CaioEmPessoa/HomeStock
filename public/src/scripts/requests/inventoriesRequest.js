@@ -35,6 +35,15 @@ class inventoriesRequest extends requestBase {
         });
     }
 
+    update(id, obj) {
+        return new Promise((resolve, reject) => {
+            this.post(`${id}/update`, obj).then((response) => {
+                let body = response.json();
+                resolve(body);
+            });
+        });
+    }
+
     delete(id) {
         return new Promise((resolve, reject) => {
             this.post(`${id}/delete`).then((response) => {
