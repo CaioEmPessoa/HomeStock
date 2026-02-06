@@ -85,6 +85,8 @@ class RegisterBase {
     async save(entity) {
         debug.log(`Saving into ${this.tableName}...`);
 
+        entity = Object.fromEntries(Object.entries(entity).filter(([_, v]) => v != null));
+
         let columns = Object.keys(entity);
         let values = `'${Object.values(entity).join("', '")}'`.replaceAll("''", null);
 
@@ -104,6 +106,8 @@ class RegisterBase {
 
     async update(entity, id) {
         debug.log(`Updating into ${this.tableName}...`);
+
+        entity = Object.fromEntries(Object.entries(entity).filter(([_, v]) => v != null));
 
         let sql = `UPDATE ${this.tableName} SET `
         let items = []
