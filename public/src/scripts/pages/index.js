@@ -35,6 +35,20 @@ class index {
 
         this.popUpActionMenu = new PopUpMenu(["Apagar", "Editar"]);
 
+        const productForm = [
+            new FormQuestions("Nome do produto", "new-product-input").text("product_name"),
+            new FormQuestions("Código de barras do produto", "new-product-input").text("product_barcode"),
+            new FormQuestions("Url ou imagem do produto", "new-product-input").text("product_image"), // TODO: url/imgae field
+            new FormQuestions("Mínimo deste produto", "new-product-input").number("product_minimum", 0),
+            new FormQuestions("Máximo deste produto", "new-product-input").number("product_maximum", 0)
+        ]
+
+        const inventoryForm = [
+            new FormQuestions("Quantos você tem?").number("inventory_quantity", 0, 100),
+            new FormQuestions("Qual a data de validade deles?").date("inventory_expiry_date"),
+            new FormQuestions("E a data de fabricação?").date("inventory_manufacturing_date")
+        ]
+
         const novoProdutoModalForm = [
             new FormQuestions("Selecione um Produto ou crie um novo").double([
                 new FormQuestions("", "produto-select").dropdown(
@@ -44,19 +58,28 @@ class index {
                 new FormQuestions().toggle("novo", "new_product_toggle")
             ]),
 
-            new FormQuestions("Nome do produto", "new-product-input").text("product_name"),
-            new FormQuestions("Código de barras do produto", "new-product-input").text("product_barcode"),
-            new FormQuestions("Url ou imagem do produto", "new-product-input").text("product_image"), // TODO: url/imgae field
-            new FormQuestions("Mínimo deste produto", "new-product-input").number("product_minimum", 0),
-            new FormQuestions("Máximo deste produto", "new-product-input").number("product_maximum", 0),
+            ... productForm,
 
             new FormQuestions("Inventário").spacer(false),
 
-            new FormQuestions("Quantos você tem?").number("inventory_quantity", 0, 100),
-            new FormQuestions("Qual a data de validade deles?").date("inventory_expiry_date"),
-            new FormQuestions("E a data de fabricação?").date("inventory_manufacturing_date"),
+            ... inventoryForm
         ]
         this.novoProdutoModal = new Modal(novoProdutoModalForm, "Novo produto!", "Confirmar", "Cancelar");
+
+        const editInventoryModalForm = [
+            new FormQuestions("Selecione um produto", "produto-select").dropdown(
+                productsOptions, "product_id", "Selecione..."
+            ),
+            ... inventoryForm
+        ]
+        this.editInventoryModal = new Modal(editInventoryModalForm, "Editar inventário", "Confirmar", "Cancelar")
+
+        const editProductModalForm = [
+            new FormQuestions("Selecione um produto para editar", "produto-select").dropdown(
+                                productsOptions, "product_id", "Selecione..."),
+            ... productForm
+        ]
+        this.editProductModal = new Modal(editProductModalForm, "Editar Produto", "Confirmar", "Cancelar")
 
         const deletarProdutoModalForm = [
             new FormQuestions("Tem certeza que deseja apagar este item do inventário?").spacer(false)
@@ -142,18 +165,16 @@ class index {
         });
     }
 
-    async spawnEditForm(id) {
-        console.log(id)
-        const currentValues = await this.inventories_request.getById(id);
-        const currentValuesObj = {
-            "inventory_quantity": currentValues.body.inventory_quantity
-        }
-        this.novoProdutoModal.setValues(currentValues.body);
-        this.novoProdutoModal.show();
+    async spawnEditInventoryForm(id) {
+        let currentValues = await this.inventories_request.getById(id);
+
+        // currentValues["inventory_expiry_date"] = convert to date
+
+        this.editInventoryModal.setValues(currentValues.body);
+        this.editInventoryModal.show();
     }
 
     async newItem(modalValues) {
-
         let newInventoryObj = {
             "inventory_quantity": modalValues.inventory_quantity,
             "inventory_expiry_date": modalValues.inventory_expiry_date,
@@ -181,6 +202,36 @@ class index {
         this.refreshPage();
     }
 
+    async editProduct(modalValues, id) {
+        let newProductObj = {
+            "product_id": id,
+            "product_name": modalValues.product_name,
+            "product_barcode": modalValues.product_barcode,
+            "product_image": modalValues.product_image,
+            "product_icon": modalValues.product_icon,
+            "product_minimum": modalValues.product_minimum,
+            "product_maximum": modalValues.product_maximum
+        }
+
+        const product_response = await this.products_request.update(id, newProductObj);
+
+        this.refreshPage();
+    }
+
+    async editInventoryItem(modalValues, id) {
+        let newInventoryObj = {
+            "inventory_id": id,
+            "inventory_quantity": modalValues.inventory_quantity,
+            "inventory_expiry_date": modalValues.inventory_expiry_date,
+            "inventory_manufacturing_date": modalValues.inventory_manufacturing_date,
+            "product_id": modalValues.product_id
+        }
+
+        const inventory_response = await this.inventories_request.update(id, newInventoryObj)
+        console.log(inventory_response)
+        this.refreshPage();
+    }
+
     addEvents() {
         let newProductButton = document.querySelector(".new-product-button")
 
@@ -204,7 +255,7 @@ class index {
                 this.deletarProdutoModal.show()
             }
             else if(action == "Editar") {
-                this.spawnEditForm(this.selectedItem);
+                this.spawnEditInventoryForm(this.selectedItem);
             }
 
         })
@@ -229,6 +280,11 @@ class index {
             const modalValues = this.novoProdutoModal.confirm();
             this.newItem(modalValues);
         });
+
+        this.editInventoryModal.modalForm.addEventListener("submit", () => {
+            const modalValues = this.editInventoryModal.confirm();
+            this.editInventoryItem(modalValues, this.selectedItem);
+        })
 
         this.deletarProdutoModal.modalForm.addEventListener("submit", () => {
             this.deletarProdutoModal.confirm();
