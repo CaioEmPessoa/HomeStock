@@ -46,7 +46,10 @@ class Modal {
         modalForm.className = 'modal-form';
 
         this.questions.forEach(question => {
-            modalForm.append(question);
+            // TODO: This maybe not performatic.
+            // Am doing this just to reuse the New Question arrays
+            const cp_elmnt = question.cloneNode(true);
+            modalForm.append(cp_elmnt);
         });
 
         // Buttons
@@ -111,7 +114,7 @@ class Modal {
         const formObject = Object.fromEntries(formData.entries());
 
         Object.keys(formObject).forEach((formElmnt) => {
-            let el = document.querySelector(`[name="${formElmnt}"]`);
+            let el = this.modalForm.querySelector(`[name="${formElmnt}"]`);
             el.value = obj[formElmnt];
         })
 
