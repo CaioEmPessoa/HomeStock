@@ -80,10 +80,17 @@
 
 /* Elements on new prodct modal */
 .new-product-input {
-    display: none;
 }
 
-.new-produtct .new-product-button { 
+.new-produtct .new-product-button {
+    padding: 8px 17px;
+    color: white;
+    font-weight: 700;
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+.edit-product-button {
     padding: 8px 17px;
     color: white;
     font-weight: 700;

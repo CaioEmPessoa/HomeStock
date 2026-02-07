@@ -10,7 +10,7 @@ class productRegister extends registers_base {
                 product_id INT NOT NULL AUTO_INCREMENT,
                 product_name VARCHAR(500),
                 product_barcode VARCHAR(20),
-                product_image VARCHAR(30),
+                product_image VARCHAR(500),
                 product_icon CHAR(1),
                 product_minimum TINYINT,
                 product_maximum TINYINT,

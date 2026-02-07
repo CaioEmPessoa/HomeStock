@@ -65,6 +65,7 @@ class index {
             ... inventoryForm
         ]
         this.novoProdutoModal = new Modal(novoProdutoModalForm, "Novo produto!", "Confirmar", "Cancelar");
+        this.toggleNewProductItens(false); // hide product itens
 
         const editInventoryModalForm = [
             new FormQuestions("Selecione um produto", "produto-select").dropdown(
@@ -97,7 +98,7 @@ class index {
                 <div class="product-compact-list-item" data-inventory-id=${inventory.inventory_id}>
 
                     <div class="compact-item-info">
-                        <img class="compact-item-icon" src="https://placehold.co/125x125" alt="#">
+                        <img class="compact-item-icon" src="${inventory.product_image ?? "https://placehold.co/125x125"}" alt="#">
                         <p class="compact-item-name">${inventory.product_name}</p>
                     </div>
 
@@ -165,6 +166,16 @@ class index {
         });
     }
 
+    toggleNewProductItens(value) {
+        const productInfos = this.novoProdutoModal.modalForm.querySelectorAll(".new-product-input");
+        productInfos.forEach((productInput) => {
+            productInput.style.display = value ? "revert" : "none";
+        });
+
+        const productSelect = this.novoProdutoModal.modalForm.querySelector(".produto-select select");
+        productSelect.disabled = value;
+    }
+
     async spawnEditInventoryForm(id) {
         let currentValues = await this.inventories_request.getById(id);
 
@@ -172,6 +183,12 @@ class index {
 
         this.editInventoryModal.setValues(currentValues.body);
         this.editInventoryModal.show();
+    }
+
+    async updateEditProductModal(id) {
+        let updatedValues = await this.products_request.getById(id);
+
+        this.editProductModal.setValues(updatedValues.body);
     }
 
     async newItem(modalValues) {
@@ -234,9 +251,14 @@ class index {
 
     addEvents() {
         let newProductButton = document.querySelector(".new-product-button")
-
         newProductButton.addEventListener( "click", (e) => {
                 this.novoProdutoModal.show();
+            }
+        )
+
+        let editProductButton = document.querySelector(".edit-product-button")
+        editProductButton.addEventListener( "click", (e) => {
+                this.editProductModal.show();
             }
         )
 
@@ -261,7 +283,6 @@ class index {
         })
 
         const productCompactListItens = document.querySelectorAll(".product-compact-list-item");
-
         productCompactListItens.forEach((item) => {
             item.addEventListener("click", (event) => {
                 // increase events
@@ -286,6 +307,13 @@ class index {
             this.editInventoryItem(modalValues, this.selectedItem);
         })
 
+        this.editProductModal.modalForm.addEventListener("submit", () => {
+            const modalValues = this.editProductModal.confirm();
+            console.log(modalValues.product_id, modalValues)
+            this.products_request.update(modalValues.product_id, modalValues);
+            this.refreshPage();
+        })
+
         this.deletarProdutoModal.modalForm.addEventListener("submit", () => {
             this.deletarProdutoModal.confirm();
             this.inventories_request.delete(this.selectedItem);
@@ -294,13 +322,12 @@ class index {
 
         let novoProdutoToggle = this.novoProdutoModal.modalForm.querySelector("input[name=new_product_toggle]");
         novoProdutoToggle.addEventListener("click", (toggleInput) => {
-            const productInfos = this.novoProdutoModal.modalForm.querySelectorAll(".new-product-input");
-            productInfos.forEach((productInput) => {
-                productInput.style.display = toggleInput.target.checked ? "revert" : "none";
-            });
+            this.toggleNewProductItens(toggleInput.target.checked);
+        })
 
-            const productSelect = this.novoProdutoModal.modalForm.querySelector(".produto-select select");
-            productSelect.disabled = toggleInput.target.checked;
+        let editProductSelection = this.editProductModal.modalForm.querySelector("select[name=product_id]");
+        editProductSelection.addEventListener("change", () => {
+            this.updateEditProductModal(editProductSelection.value);
         })
 
     }
