@@ -11,8 +11,7 @@ class productsRequest extends requestBase {
     getAll() {
         return new Promise((resolve, reject) => {
             this.get("list").then((response) => {
-                let body = response.json()
-                resolve(body)
+                resolve(response)
             });
         });
     }
@@ -20,8 +19,7 @@ class productsRequest extends requestBase {
     getById(id) {
         return new Promise((resolve, reject) => {
             this.get(`${id}/`).then((response) => {
-                let body = response.json();
-                resolve(body);
+                resolve(response);
             });
         });
     }
@@ -29,8 +27,7 @@ class productsRequest extends requestBase {
     new(obj) {
         return new Promise((resolve, reject) => {
             this.post("new", obj).then((response) => {
-                let body = response.json()
-                resolve(body)
+                resolve(response)
             });
         });
     }
@@ -38,8 +35,7 @@ class productsRequest extends requestBase {
     update(id, obj) {
         return new Promise((resolve, reject) => {
             this.post(`${id}/update`, obj).then((response) => {
-                let body = response.json();
-                resolve(body);
+                resolve(response);
             });
         });
     }

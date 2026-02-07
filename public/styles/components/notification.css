@@ -1,0 +1,48 @@
+.notification {
+    position: fixed;
+    visibility: hidden;
+    right: 0;
+    bottom: 0;
+    padding: 7px;
+    margin: 25px;
+    border-radius: 6px;
+    background-color: lime;
+    font-size: 20px;
+    animation: hide-notification 0.5s forwards;
+}
+
+.notification:hover {
+    animation-play-state: paused
+}
+
+@keyframes show-notification {
+  0% {
+    visibility: visible;
+    transition: 2s;
+    display: block;
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    visibility: visible;
+    transition: 2s;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes hide-notification {
+  0% {
+    visibility: visible;
+    transition: 2s;
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  100% {
+    visibility: visible;
+    transition: 2s;
+    opacity: 1;
+    transform: translateX(200%);
+  }
+}
