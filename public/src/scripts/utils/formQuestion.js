@@ -125,14 +125,15 @@ class FormQuestion {
      * @returns
      */
     dropdown(options = [], name="", defaultOption="") {
+        let optionsLocal = options.slice();
         let modalFormQuestion = this._genModalFormQuestion();
 
         let modalQuestionSelectDropdown = document.createElement("select");
         modalQuestionSelectDropdown.classList.add("modal-question-input");
         modalQuestionSelectDropdown.name = name;
 
-        if (defaultOption) options.unshift({name:defaultOption, value:""});
-        options.forEach((el) => {
+        if (defaultOption) optionsLocal.unshift({name:defaultOption, value:""});
+        optionsLocal.forEach((el) => {
             let modalQuestionSelectDropdownOption = document.createElement('option');
             modalQuestionSelectDropdownOption.value = el.value;
             modalQuestionSelectDropdownOption.innerText = el.name;
