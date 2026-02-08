@@ -2,6 +2,7 @@
 import Modal from "../utils/modal.js";
 import FormQuestions from "../utils/formQuestion.js";
 import PopUpMenu from "../utils/popUpMenu.js";
+import Notification from "../utils/notification.js";
 
 import productsRequest from "../requests/productsRequest.js";
 import inventoriesRequest from "../requests/inventoriesRequest.js";
@@ -150,6 +151,16 @@ class index {
     }
 
     // Action Functions
+    async editStock(id, value) {
+        const stockInput = document.getElementById(`inventory-ammnt-${id}`);
+
+        const response = await this.inventories_request.update(id, {
+            "inventory_quantity": value
+        })
+
+        stockInput.value = response.body.inventory_quantity;
+    }
+
     addStock(id) {
         const stockInput = document.getElementById(`inventory-ammnt-${id}`);
 
@@ -219,36 +230,6 @@ class index {
         this.refreshPage();
     }
 
-    async editProduct(modalValues, id) {
-        let newProductObj = {
-            "product_id": id,
-            "product_name": modalValues.product_name,
-            "product_barcode": modalValues.product_barcode,
-            "product_image": modalValues.product_image,
-            "product_icon": modalValues.product_icon,
-            "product_minimum": modalValues.product_minimum,
-            "product_maximum": modalValues.product_maximum
-        }
-
-        const product_response = await this.products_request.update(id, newProductObj);
-
-        this.refreshPage();
-    }
-
-    async editInventoryItem(modalValues, id) {
-        let newInventoryObj = {
-            "inventory_id": id,
-            "inventory_quantity": modalValues.inventory_quantity,
-            "inventory_expiry_date": modalValues.inventory_expiry_date,
-            "inventory_manufacturing_date": modalValues.inventory_manufacturing_date,
-            "product_id": modalValues.product_id
-        }
-
-        const inventory_response = await this.inventories_request.update(id, newInventoryObj)
-        console.log(inventory_response)
-        this.refreshPage();
-    }
-
     addEvents() {
         let newProductButton = document.querySelector(".new-product-button")
         newProductButton.addEventListener( "click", (e) => {
@@ -295,6 +276,12 @@ class index {
                     this.removeStock(item.dataset.inventoryId);
                 }
             });
+
+            item.addEventListener("keyup", (event) => {
+                if(event.target.closest(".compact-item-stock-edit")) {
+                    this.editStock(item.dataset.inventoryId, event.target.value)
+                }
+            })
         });
 
         this.novoProdutoModal.modalForm.addEventListener("submit", () => {
@@ -304,12 +291,12 @@ class index {
 
         this.editInventoryModal.modalForm.addEventListener("submit", () => {
             const modalValues = this.editInventoryModal.confirm();
-            this.editInventoryItem(modalValues, this.selectedItem);
+            this.inventories_request.update(this.selectedItem, modalValues);
+            this.refreshPage();
         })
 
         this.editProductModal.modalForm.addEventListener("submit", () => {
             const modalValues = this.editProductModal.confirm();
-            console.log(modalValues.product_id, modalValues)
             this.products_request.update(modalValues.product_id, modalValues);
             this.refreshPage();
         })
