@@ -1,3 +1,4 @@
+import Notification from "../utils/notification.js";
 
 class requestsBase {
     constructor (requestPath) {
@@ -6,14 +7,8 @@ class requestsBase {
     }
 
     sendNotf(message, error) {
-        const notificationElmnt = document.querySelector(".notification");
-        notificationElmnt.innerHTML = `<p class="notification-message">${error ? "Error:" : ""} ${message}</p>`;
-        notificationElmnt.style.animation = "show-notification 0.5s forwards";
-        notificationElmnt.style.background = error ? "red" : "lime";
-
-        setTimeout(() => {
-            notificationElmnt.style.animation = "hide-notification 0.7s";
-        }, 2500)
+        const notf = new Notification(message, error);
+        notf.showPop();
     }
 
     async get(path) {

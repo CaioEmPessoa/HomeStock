@@ -1,10 +1,14 @@
+.notification-area {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 25px;
+}
+
 .notification {
-    position: fixed;
     visibility: hidden;
-    right: 0;
-    bottom: 0;
     padding: 7px;
-    margin: 25px;
+    margin: 5px;
     border-radius: 6px;
     background-color: lime;
     font-size: 20px;
@@ -13,6 +17,17 @@
 
 .notification:hover {
     animation-play-state: paused
+}
+
+.notification.show {
+  animation: show-notification 0.5s forwards;
+}
+.notification.hide {
+  animation: hide-notification 0.5s forwards;
+}
+
+.notification.error {
+  background-color: red;
 }
 
 @keyframes show-notification {
