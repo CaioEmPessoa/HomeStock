@@ -4,11 +4,13 @@ class FormQuestion {
     /**
      * Generates a FormQuestion of choice. Used inside a modal.
      * @param {string} title -> (Optional) Title for the generated formQuestion
-     * @param {*} customClass -> (Optional) Custom class for the generated FormQuestion
+     * @param {boolean} required -> defines if the input is required
+     * @param {string} customClass -> (Optional) Custom class for the generated FormQuestion
      */
-    constructor (title, customClass) {
+    constructor (title, required, customClass) {
         this.title = title || "";
         this.customClass = customClass || "";
+        this.required = required ?? false;
     }
 
     _genModalFormQuestion() {
@@ -42,6 +44,7 @@ class FormQuestion {
         modalQuestionInput.classList.add("modal-question-input")
         modalQuestionInput.type = inputType;
         modalQuestionInput.name = name;
+        modalQuestionInput.required = this.required;
 
         modalFormQuestion.append(modalQuestionInput);
 
@@ -102,6 +105,7 @@ class FormQuestion {
             modalQuestionInput.type  = "radio";
             modalQuestionInput.value = el;
             modalQuestionInput.name  = name;
+            modalQuestionInput.required  = this.required;
             modalQuestionInput.id  = `${name}-${el}`;
 
             let modalQuestionInputLabel = document.createElement('label');
@@ -131,6 +135,7 @@ class FormQuestion {
         let modalQuestionSelectDropdown = document.createElement("select");
         modalQuestionSelectDropdown.classList.add("modal-question-input");
         modalQuestionSelectDropdown.name = name;
+        modalQuestionSelectDropdown.required = this.required;
 
         if (defaultOption) optionsLocal.unshift({name:defaultOption, value:""});
         optionsLocal.forEach((el) => {

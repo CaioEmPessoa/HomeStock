@@ -37,22 +37,22 @@ class index {
         this.popUpActionMenu = new PopUpMenu(["Apagar", "Editar"]);
 
         const productForm = [
-            new FormQuestions("Nome do produto", "new-product-input").text("product_name"),
-            new FormQuestions("Código de barras do produto", "new-product-input").text("product_barcode"),
-            new FormQuestions("Url ou imagem do produto", "new-product-input").text("product_image"), // TODO: url/imgae field
-            new FormQuestions("Mínimo deste produto", "new-product-input").number("product_minimum", 0),
-            new FormQuestions("Máximo deste produto", "new-product-input").number("product_maximum", 0)
+            new FormQuestions("Nome do produto", true, "new-product-input").text("product_name"),
+            new FormQuestions("Código de barras do produto", false, "new-product-input").text("product_barcode"),
+            new FormQuestions("Url ou imagem do produto", false, "new-product-input").text("product_image"), // TODO: url/imgae field
+            new FormQuestions("Mínimo deste produto", false, "new-product-input").number("product_minimum", 0),
+            new FormQuestions("Máximo deste produto", false, "new-product-input").number("product_maximum", 0)
         ]
 
         const inventoryForm = [
-            new FormQuestions("Quantos você tem?").number("inventory_quantity", 0, 100),
+            new FormQuestions("Quantos você tem?", true).number("inventory_quantity", 0, 100),
             new FormQuestions("Qual a data de validade deles?").date("inventory_expiry_date"),
             new FormQuestions("E a data de fabricação?").date("inventory_manufacturing_date")
         ]
 
         const novoProdutoModalForm = [
             new FormQuestions("Selecione um Produto ou crie um novo").double([
-                new FormQuestions("", "produto-select").dropdown(
+                new FormQuestions("", true, "produto-select").dropdown(
                     productsOptions, "product_id", "Selecione..."
                 ),
 
@@ -181,6 +181,7 @@ class index {
         const productInfos = this.novoProdutoModal.modalForm.querySelectorAll(".new-product-input");
         productInfos.forEach((productInput) => {
             productInput.style.display = value ? "revert" : "none";
+            productInput.querySelector("input").required = value;
         });
 
         const productSelect = this.novoProdutoModal.modalForm.querySelector(".produto-select select");
