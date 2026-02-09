@@ -93,9 +93,9 @@ class index {
         productsCompactList.innerHTML = "";
 
         const inventoryData = await this.inventories_request.getAll();
-        inventoryData.body.forEach(inventory => {
 
-        let item = `
+        inventoryData.body.forEach(inventory => {
+            let item = `
                 <div class="product-compact-list-item" data-inventory-id=${inventory.inventory_id}>
 
                     <div class="compact-item-info">
@@ -142,9 +142,9 @@ class index {
                         </button>
                     </div>
                 </div>
-        `
+            `
 
-        productsCompactList.innerHTML += item
+            productsCompactList.innerHTML += item
         });
 
 
